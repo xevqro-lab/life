@@ -1,0 +1,1251 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#0a0f1f"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="manifest" href="/manifest.webmanifest">
+<title>LifeFlow</title>
+<style>
+:root{--bg:#090d18;--danger:#ff7195;--surface:#11182b;--surface2:#18223a;--text:#f7f8fd;--muted:#9ba6be;--violet:#8268ff;--mint:#34ddb1;--pink:#ff7195;--gold:#ffc966;--line:rgba(255,255,255,.08);--shadow:0 24px 70px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(900px 500px at 10% -10%,rgba(130,104,255,.24),transparent 55%),radial-gradient(800px 540px at 105% 12%,rgba(52,221,177,.13),transparent 55%),var(--bg);color:var(--text);font:15px/1.5 Manrope,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}.shell{max-width:1160px;margin:auto;padding:24px 22px 150px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:12px;font-size:19px;font-weight:800}.logo{width:43px;height:43px;border-radius:15px;background:linear-gradient(135deg,var(--violet),var(--mint));display:grid;place-items:center;box-shadow:0 12px 34px rgba(130,104,255,.32);font-size:22px;transition:transform .28s ease,filter .28s ease}.logo.mood-pop{animation:moodPop .32s ease}@keyframes moodPop{50%{transform:scale(1.12) rotate(4deg)}}.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#25304c,#10182b);border:1px solid var(--line);display:grid;place-items:center}.screen{display:none;animation:screenIn .32s ease}.screen.active{display:block}@keyframes screenIn{from{opacity:0;transform:translateY(12px) scale(.995)}to{opacity:1;transform:none}}button:active{transform:scale(.97)}
+.hero{position:relative;overflow:hidden;padding:28px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(135deg,rgba(130,104,255,.15),rgba(52,221,177,.07));box-shadow:var(--shadow);min-height:230px}.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:rgba(130,104,255,.13);color:#cfc8ff;font-size:12px}.hero h1{font-size:clamp(34px,5vw,58px);letter-spacing:-.05em;line-height:.98;margin:16px 0 12px;max-width:720px}.hero p{max-width:610px;color:var(--muted);font-size:16px}.orb{position:absolute;border-radius:50%;filter:blur(.2px);pointer-events:none}.orb.a{width:180px;height:180px;right:35px;top:28px;background:linear-gradient(135deg,var(--violet),var(--mint));opacity:.85;animation:float 5s ease-in-out infinite}.orb.b{width:88px;height:88px;right:190px;bottom:8px;background:rgba(255,255,255,.08);backdrop-filter:blur(12px);animation:float 6s ease-in-out infinite reverse}.orb.c{width:34px;height:34px;right:40px;bottom:30px;background:var(--gold);opacity:.75;animation:pulse 2.5s ease-in-out infinite}@keyframes float{50%{transform:translateY(-13px) rotate(6deg)}}@keyframes pulse{50%{transform:scale(1.18);opacity:.45}}
+.layout{display:grid;grid-template-columns:1.35fr .65fr;gap:18px;margin-top:18px}.card{border:1px solid var(--line);background:rgba(17,24,43,.8);backdrop-filter:blur(18px);border-radius:24px;padding:18px;box-shadow:0 16px 45px rgba(0,0,0,.16)}.cardHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.cardHead h2{margin:0;font-size:20px;letter-spacing:-.02em}.muted{color:var(--muted)}
+.progressRing{--p:0;position:relative;width:128px;height:128px;border-radius:50%;background:conic-gradient(var(--mint) calc(var(--p)*1%),rgba(255,255,255,.07) 0);display:grid;place-items:center}.progressRing:after{content:"";position:absolute;inset:12px;background:var(--surface);border-radius:50%}.ringText{position:relative;z-index:1;text-align:center}.ringText b{display:block;font-size:31px}.ringText span{font-size:11px;color:var(--muted)}.overview{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:18px}.miniStats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.mini{padding:13px;border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:16px}.mini b{display:block;font-size:21px}.mini span{font-size:11px;color:var(--muted)}
+.quickList{display:grid;gap:10px}.habitRow{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:13px;border-radius:18px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055);transition:.22s}.habitRow:hover{transform:translateY(-2px);background:rgba(255,255,255,.055)}.ico{width:43px;height:43px;border-radius:14px;background:rgba(255,255,255,.07);display:grid;place-items:center;font-size:21px}.habitRow h3{font-size:15px;margin:0 0 3px}.habitRow small{color:var(--muted)}.toggle{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.055);color:white;font-size:19px;cursor:pointer;transition:.22s}.toggle.done{background:linear-gradient(135deg,var(--mint),#67efff);color:#07131a;box-shadow:0 10px 25px rgba(52,221,177,.2);animation:pop .28s ease}@keyframes pop{50%{transform:scale(1.15)}}
+.sectionTitle{display:flex;justify-content:space-between;gap:12px;align-items:end;margin:26px 0 13px}.sectionTitle h1,.sectionTitle h2{margin:0;letter-spacing:-.03em}.tabs{display:flex;gap:8px;flex-wrap:wrap}.pill{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);border-radius:999px;padding:9px 13px;cursor:pointer}.pill.active{background:linear-gradient(135deg,var(--violet),#647eff);border-color:transparent}.habitGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.habitCard{padding:18px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(155deg,rgba(255,255,255,.065),rgba(255,255,255,.025));position:relative;overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.12);transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}.habitCard:hover{transform:translateY(-3px);border-color:rgba(130,104,255,.25);box-shadow:0 20px 46px rgba(0,0,0,.2)}.habitCard:before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:-42px;top:-46px;background:radial-gradient(circle,rgba(130,104,255,.18),rgba(130,104,255,.02) 70%);animation:orbreathe 5s ease-in-out infinite}@keyframes orbreathe{50%{transform:scale(1.16);opacity:.65}}.habitTop{display:flex;justify-content:space-between;align-items:start;gap:12px}.habitActions{display:flex;gap:5px}.iconBtn{width:34px;height:34px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);cursor:pointer}.iconBtn:hover{color:white}.bar{height:7px;background:#0c1222;border-radius:99px;overflow:hidden;margin:14px 0 7px}.bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--violet),var(--mint));transition:.35s}.weekDots{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.dot{width:30px;height:30px;border-radius:10px;background:#0e1527;color:#65718a;font-size:10px;display:grid;place-items:center;transition:.25s transform,.25s box-shadow}.dot.hit{background:linear-gradient(135deg,var(--violet),var(--mint));color:white;transform:translateY(-2px);box-shadow:0 8px 18px rgba(130,104,255,.2)}.habitFooter{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.055)}.doneBtn{min-height:46px;flex:1;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.055);color:white;border-radius:14px;padding:10px 14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;transition:.25s transform,.25s box-shadow,.25s background}.doneBtn:hover{transform:translateY(-1px)}.doneBtn.done{background:linear-gradient(135deg,var(--mint),#61eaf7);color:#07131a;box-shadow:0 12px 30px rgba(52,221,177,.18)}.addBtn{width:100%;border:1px dashed rgba(130,104,255,.48);background:linear-gradient(135deg,rgba(130,104,255,.12),rgba(52,221,177,.06));color:#e2deff;border-radius:20px;padding:16px;cursor:pointer;margin-top:18px;transition:.25s transform,.25s box-shadow}.addBtn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(130,104,255,.12)}
+.taskFilters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tasks{display:grid;gap:9px}.task{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:rgba(255,255,255,.035);padding:12px 13px;border-radius:15px}.task input{width:18px;height:18px;accent-color:var(--violet)}.task.done .taskText{text-decoration:line-through;color:#68738a}.taskText{flex:1}.taskDate{font-size:11px;color:var(--muted)}.inputRow{display:flex;gap:8px;margin-top:12px}.inputRow input,.inputRow select,.modal input,.modal select{background:#0c1324;color:white;border:1px solid var(--line);border-radius:13px;padding:12px;outline:none}.inputRow input{flex:1}.primary{border:0;background:linear-gradient(135deg,var(--violet),#6680ff);color:white;border-radius:13px;padding:11px 15px;cursor:pointer}.danger{color:var(--pink)}
+.bottomNav{position:fixed;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(680px,calc(100% - 28px));padding:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:rgba(17,24,43,.9);border:1px solid var(--line);border-radius:22px;backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,.38);z-index:20}.navBtn{border:0;background:transparent;color:#7f8ba2;border-radius:16px;padding:9px 5px;display:grid;gap:3px;place-items:center;cursor:pointer}.navBtn span:first-child{font-size:20px}.navBtn small{font-size:10px}.navBtn.active{background:linear-gradient(135deg,rgba(130,104,255,.24),rgba(92,111,255,.12));color:white;box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)}
+.modalWrap{position:fixed;inset:0;background:rgba(2,5,12,.72);display:none;place-items:center;padding:18px;z-index:50;backdrop-filter:blur(8px)}.modalWrap.open{display:grid}.modal{width:min(510px,100%);border:1px solid var(--line);background:#11182b;border-radius:24px;padding:20px;box-shadow:var(--shadow)}.modal h2{margin-top:0}.field{display:grid;gap:6px;margin:11px 0}.modalActions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.secondary{border:1px solid var(--line);background:transparent;color:white;border-radius:13px;padding:11px 14px;cursor:pointer}.toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-20px);opacity:0;background:#172039;border:1px solid var(--line);padding:10px 14px;border-radius:999px;z-index:70;transition:.3s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.habitGrid{grid-template-columns:1fr;gap:16px}.hero{min-height:245px}.orb.a{right:-45px;opacity:.5}.orb.b{display:none}.overview{grid-template-columns:120px 1fr}.progressRing{width:115px;height:115px}.shell{padding:18px 16px calc(180px + env(safe-area-inset-bottom))}.hero{padding:24px}.sectionTitle{margin:30px 0 17px}.tabs{gap:10px;margin-bottom:18px}.pill{padding:10px 14px}.habitCard{padding:19px}.card{border-radius:26px}.bottomNav{width:calc(100% - 24px);border-radius:25px;padding:9px}.navBtn{min-height:62px}.navBtn span:first-child{font-size:22px}}
+@media(max-width:520px){.overview{grid-template-columns:1fr}.progressRing{margin:auto}.miniStats{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:38px}.top .muted{display:none}.card{padding:17px}.habitTop{gap:14px}.habitActions{gap:7px}.iconBtn{width:38px;height:38px;border-radius:12px}.ico{width:48px;height:48px;border-radius:16px;font-size:23px}.weekDots{justify-content:space-between;gap:5px}.dot{width:31px;height:31px}.habitFooter{align-items:stretch;flex-direction:column}.doneBtn{width:100%}.sectionTitle{align-items:center}.sectionTitle h1{font-size:38px}.top{margin-bottom:24px}.brand{font-size:20px}}
+</style>
+
+<style id="goal-v3-styles">
+.goalHero{
+  position:relative;overflow:hidden;padding:24px;border-radius:28px;
+  background:
+    radial-gradient(240px 150px at 88% 12%,rgba(52,221,177,.18),transparent 70%),
+    linear-gradient(145deg,rgba(130,104,255,.16),rgba(20,28,48,.9));
+  border:1px solid rgba(255,255,255,.08);margin-bottom:18px
+}
+.goalHero h2{font-size:34px;margin:8px 0 8px}
+.goalRoute{
+  margin-top:20px;padding:16px 14px;border-radius:20px;background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.06)
+}
+.routeLine{position:relative;height:6px;border-radius:999px;background:#0d1424;margin:28px 22px 14px}
+.routeFill{position:absolute;inset:0 auto 0 0;border-radius:999px;background:linear-gradient(90deg,var(--violet),var(--mint));transition:width .6s ease}
+.plane{position:absolute;top:50%;transform:translate(-50%,-50%);font-size:24px;transition:left .7s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 5px 10px rgba(0,0,0,.25))}
+.routeEnds{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--muted)}
+.goalGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.goalCard{padding:18px;border-radius:22px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);transition:.25s transform,.25s border-color}
+.goalCard:hover{transform:translateY(-2px);border-color:rgba(130,104,255,.26)}
+.goalCardTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.goalValue{font-size:26px;font-weight:800;margin:8px 0 3px}
+.goalBar{height:9px;border-radius:999px;background:#0d1424;overflow:hidden;margin-top:12px}
+.goalBar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--violet),var(--mint));transition:width .55s ease}
+.goalControls{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.goalControls input{flex:1;min-width:130px;background:#0e1527;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:11px;color:#fff}
+.goalControls button{min-height:42px}
+.goalMeta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 2px}
+.goalMini{padding:12px;border-radius:16px;background:rgba(255,255,255,.035);text-align:center}
+.goalMini b{display:block;font-size:21px}.goalMini span{font-size:11px;color:var(--muted)}
+.goalScoreWrap{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center}
+.goalRing{
+  --p:0; width:140px;height:140px;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--mint) calc(var(--p)*1%),rgba(255,255,255,.06) 0);
+  position:relative;transition:.5s
+}
+.goalRing:after{content:"";position:absolute;inset:12px;background:#11192b;border-radius:50%}
+.goalRingInner{position:relative;z-index:2;text-align:center}.goalRingInner b{display:block;font-size:30px}
+.goalList{display:grid;gap:10px}
+.goalRow{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:15px;background:rgba(255,255,255,.03)}
+.goalRow .grow{flex:1}.goalRow small{color:var(--muted)}
+.goalTag{padding:5px 8px;border-radius:999px;background:rgba(130,104,255,.12);color:#d8d1ff;font-size:11px}
+.goalSectionTitle{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:24px 0 12px}
+.goalSectionTitle h3{margin:0}
+@media(max-width:720px){
+  .goalGrid{grid-template-columns:1fr}.goalScoreWrap{grid-template-columns:1fr}.goalRing{margin:auto}
+  .goalMeta{grid-template-columns:1fr}.goalHero{padding:20px}.goalHero h2{font-size:30px}
+}
+</style>
+
+
+<style id="lifeflow-v4-styles">
+:root{--gold:#ffcf70;--cyan:#56e0ff}
+@keyframes shimmer{0%{background-position:-180% 0}100%{background-position:180% 0}}
+@keyframes pulseSoft{50%{transform:scale(1.025);box-shadow:0 18px 55px rgba(130,104,255,.18)}}
+@keyframes floatMed{50%{transform:translateY(-7px) rotate(2deg)}}
+@keyframes glowLine{50%{filter:brightness(1.25);box-shadow:0 0 22px rgba(52,221,177,.32)}}
+
+.medVision{position:relative;overflow:hidden;border-radius:28px;padding:23px;background:linear-gradient(145deg,rgba(29,142,118,.12),rgba(130,104,255,.12));border:1px solid rgba(255,255,255,.08)}
+.medVision .city{position:absolute;right:-12px;bottom:-12px;font-size:95px;opacity:.13;animation:floatMed 5s ease-in-out infinite}
+.medVisionGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:center}
+.medQuote{font-size:25px;font-weight:850;line-height:1.08;max-width:600px;margin:8px 0}
+.milestone.good .routeFill{animation:glowLine 3s ease-in-out infinite}
+.aiNote{padding:13px 14px;border-radius:16px;background:rgba(86,224,255,.055);border:1px solid rgba(86,224,255,.1);color:#c8f7ff;font-size:13px;margin-top:13px}
+.todayPriority{animation:pulseSoft 5s ease-in-out infinite}
+@media(max-width:720px){
+  .medVisionGrid{grid-template-columns:1fr}.medVision .city{font-size:76px;opacity:.09}
+}
+</style>
+
+
+<style id="lifeflow-v5-simplify">
+/* Less visual noise */
+.hero p{max-width:520px}
+.goalHero{margin-bottom:16px}
+.goalCard,.card,.habitCard{box-shadow:none!important}
+.goalCard:hover,.habitCard:hover{transform:none}
+.goalSectionTitle{margin-top:20px}
+.goalHistoryRow{display:flex;justify-content:space-between;gap:12px;padding:9px 10px;border-radius:12px;background:rgba(255,255,255,.03)}
+.goalHistoryRow small{color:var(--muted)}
+@media(max-width:520px){
+  .goalHero{padding:18px}
+  .goalHero h2{font-size:27px}
+  .goalCard{padding:16px}
+}
+</style>
+
+
+<style id="lifeflow-v6-mobile">
+.todayCompact{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:10px 2px 16px}
+.todayCompact h1{font-size:34px;margin:2px 0 0;letter-spacing:-1px}
+.todayScore{min-width:58px;height:38px;padding:0 12px;border-radius:14px;display:grid;place-items:center;font-weight:850;background:rgba(130,104,255,.13);border:1px solid rgba(130,104,255,.16)}
+.compactGoals{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+.compactGoal{border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.035);color:#fff;border-radius:19px;padding:13px;display:flex;align-items:center;gap:10px;text-align:left;cursor:pointer;min-width:0}
+.cgIcon{width:38px;height:38px;border-radius:13px;background:rgba(130,104,255,.11);display:grid;place-items:center;font-size:19px;flex:none}
+.cgText{min-width:0;flex:1}.cgText small{display:block;color:var(--muted);font-size:10px;margin-bottom:3px}.cgText b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cgArrow{font-size:24px;color:var(--muted)}.savingsCounter{grid-column:1/-1}.compactSavingsBar{display:block;height:5px;border-radius:999px;background:#0d1424;overflow:hidden;margin-top:7px}.compactSavingsBar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--violet),var(--mint));transition:width .4s ease}
+#screen-today .sectionTitle{margin-top:20px}
+#screen-today .hero{display:none!important}
+.bottomNav{bottom:max(12px,env(safe-area-inset-bottom))!important}
+.shell{padding-bottom:calc(155px + env(safe-area-inset-bottom))!important}
+.screen{padding-bottom:28px}
+@media(max-width:520px){
+ .shell{padding-top:16px!important}
+ .top{margin-bottom:18px!important}
+ .compactGoals{grid-template-columns:1fr 1fr}
+ .compactGoal{padding:11px}
+ .cgIcon{width:35px;height:35px}
+ #screen-today .card{margin-bottom:14px}
+ .bottomNav{width:calc(100% - 24px)!important}
+}
+
+/* v8 polish */
+.topRight{display:flex;align-items:center;gap:10px}
+.goalControls button,#saveWeight{border:1px solid rgba(255,255,255,.12);background:linear-gradient(135deg,#8a73ff,#647dff);color:white;border-radius:14px;padding:11px 16px;font:700 13px/1 Manrope,sans-serif;cursor:pointer;box-shadow:0 8px 22px rgba(100,125,255,.18);transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}.goalControls button:hover,#saveWeight:hover{filter:brightness(1.07);box-shadow:0 11px 28px rgba(100,125,255,.25)}.goalControls button:active,#saveWeight:active{transform:scale(.97)}
+.goalRow{align-items:flex-start}.goalRow .grow{min-width:0}.goalRow b,.goalRow small{display:block}.goalTag{flex:none;margin-left:auto}.goalScoreWrap{overflow:hidden}.goalList{min-width:0}
+
+.aiAdvisor{margin:0 0 18px;padding:16px 17px;border-radius:22px;border:1px solid rgba(86,224,255,.13);background:linear-gradient(145deg,rgba(86,224,255,.07),rgba(130,104,255,.08));position:relative;overflow:hidden}.aiAdvisorTop{display:flex;align-items:center;justify-content:space-between;gap:12px}.aiAdvisorTitle{display:flex;align-items:center;gap:9px;font-weight:850}.aiPulse{width:9px;height:9px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(52,221,177,.35);animation:aiPulse 2s infinite}.aiAdvisorText{margin-top:10px;font-size:14px;line-height:1.5}@keyframes aiPulse{70%{box-shadow:0 0 0 8px rgba(52,221,177,0)}100%{box-shadow:0 0 0 0 rgba(52,221,177,0)}}
+.milestone:hover{transform:translateY(-1px);background:rgba(255,255,255,.05)}.milestone:active{transform:scale(.985)}.milestone[data-target]{border-color:rgba(255,255,255,.035)}
+.flashTarget{animation:flashTarget 1.15s ease}@keyframes flashTarget{0%,100%{box-shadow:none}35%{box-shadow:0 0 0 3px rgba(130,104,255,.28),0 0 36px rgba(130,104,255,.18)}}
+@media(max-width:520px){.topRight #todayLabel{display:none}.goalRow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:9px}.goalRow .grow{overflow:hidden}.goalRow small{line-height:1.35;margin-top:3px}.goalScoreWrap{padding-bottom:24px}.goalScoreWrap h3{font-size:19px}.bottomNav{bottom:max(10px,env(safe-area-inset-bottom))!important}.screen{padding-bottom:88px}.compactGoals{grid-template-columns:1fr 1fr}.cgText b{font-size:12px}.cgText small{font-size:9px}.cgArrow{display:none}}
+</style>
+
+
+<style id="lifeflow-v11-cleanup">
+#screen-today .todayTasksCard{margin-top:4px}
+#screen-today .todayTasksCard .cardHead{margin-bottom:12px}
+@media(max-width:520px){#screen-today .todayTasksCard{margin-top:2px}}
+</style>
+
+<style id="lifeflow-v13-interactive">
+:root{--ease:cubic-bezier(.2,.8,.2,1)}
+body{letter-spacing:-.012em}
+.brand,.todayCompact h1,.sectionTitle h1,.goalHero h2{letter-spacing:-.045em}
+.card,.goalCard,.habitCard,.compactGoal,.aiAdvisor,.goalRoute{transition:transform .28s var(--ease),border-color .28s ease,background .28s ease,box-shadow .28s ease}
+.compactGoal{position:relative;overflow:hidden}
+.compactGoal:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.055) 48%,transparent 70%);transform:translateX(-120%);transition:transform .6s var(--ease);pointer-events:none}
+.compactGoal:hover{transform:translateY(-3px);border-color:rgba(130,104,255,.28);background:rgba(255,255,255,.052);box-shadow:0 16px 35px rgba(0,0,0,.16)}
+.compactGoal:hover:before{transform:translateX(120%)}
+.cgIcon{transition:transform .28s var(--ease)}.compactGoal:hover .cgIcon{transform:scale(1.08) rotate(-3deg)}
+.goalCard:hover,.habitCard:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.12)!important}
+
+/* Medellín route: lighter, cleaner, interactive */
+.goalRoute{position:relative;margin-top:22px;padding:18px 18px 14px;border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(8,14,28,.28));border:1px solid rgba(255,255,255,.075);cursor:pointer;overflow:hidden}
+.goalRoute:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-90px;top:-120px;background:radial-gradient(circle,rgba(52,221,177,.12),transparent 68%);pointer-events:none}
+.goalRoute:hover{border-color:rgba(86,224,255,.18);background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(8,14,28,.32));box-shadow:0 18px 48px rgba(0,0,0,.16)}
+.routeHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:relative;z-index:1}.routeHeader small{display:block;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.12em}.routeHeader b{display:block;margin-top:3px;font-size:16px}.routeReady{padding:7px 10px;border-radius:999px;background:rgba(52,221,177,.09);border:1px solid rgba(52,221,177,.13);color:#a9f5df;font-weight:800;font-size:12px}
+.routeTrack{display:grid;grid-template-columns:12px minmax(0,1fr) 12px;gap:0;align-items:center;margin:28px 4px 10px}.routePoint{width:10px;height:10px;border-radius:50%;background:#26334d;border:2px solid rgba(255,255,255,.18);box-shadow:0 0 0 5px rgba(255,255,255,.025);z-index:3}.endPoint{background:var(--mint);border-color:#8ff3d8;box-shadow:0 0 0 5px rgba(52,221,177,.07)}
+.routeLine{position:relative;height:5px;border-radius:999px;background:#091120;margin:0 -1px}.routeFill{position:absolute;inset:0 auto 0 0;border-radius:inherit;background:linear-gradient(90deg,#806bff,#56e0ff,#34ddb1);transition:width .7s var(--ease)}.routeGlow{position:absolute;left:0;top:50%;height:18px;transform:translateY(-50%);background:linear-gradient(90deg,rgba(130,104,255,.14),rgba(52,221,177,.12));filter:blur(10px);transition:width .7s var(--ease);pointer-events:none}.plane{position:absolute;top:50%;transform:translate(-50%,-50%) rotate(3deg);font-size:26px;transition:left .8s var(--ease),transform .25s ease;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35));z-index:4}.goalRoute:hover .plane{transform:translate(-50%,-54%) rotate(7deg) scale(1.06)}
+.routeEnds{display:flex;justify-content:space-between;gap:18px}.routeEnds>span{display:flex;flex-direction:column}.routeEnds>span:last-child{text-align:right}.routeEnds b{font-size:12px;font-weight:750}.routeEnds small{font-size:9px;color:var(--muted);margin-top:2px}
+.routeExpand{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-height:0;opacity:0;transform:translateY(-5px);overflow:hidden;transition:max-height .35s var(--ease),opacity .25s ease,transform .3s var(--ease),margin .3s ease}.goalRoute.expanded .routeExpand{max-height:90px;opacity:1;transform:none;margin-top:14px}.routeExpand>div{padding:10px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.05)}.routeExpand small{display:block;color:var(--muted);font-size:9px}.routeExpand b{display:block;margin-top:2px;font-size:14px}.routeTapHint{text-align:center;color:#65718a;font-size:9px;margin-top:8px;transition:.25s}.goalRoute.expanded .routeTapHint{opacity:.5}
+
+/* Smarter local advisor */
+.aiAdvisor{background:radial-gradient(260px 120px at 100% 0,rgba(52,221,177,.08),transparent 70%),linear-gradient(145deg,rgba(86,224,255,.055),rgba(130,104,255,.075));border-color:rgba(117,153,255,.13)}
+.aiAdvisor:hover{border-color:rgba(117,153,255,.22);box-shadow:0 16px 44px rgba(0,0,0,.14)}
+.aiMark{width:29px;height:29px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(130,104,255,.2),rgba(52,221,177,.14));font-size:14px}.aiAdvisorTitle{font-weight:800}.aiAdvisorText{font-size:14px;line-height:1.55;margin-top:12px;max-width:850px}.aiContext{margin-top:8px;color:#73829d;font-size:10px;font-weight:650;letter-spacing:.01em}.aiAdvisorActions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}.aiPrimaryAction,.aiWhy{border-radius:12px;padding:9px 12px;font:700 11px/1 Manrope,sans-serif;cursor:pointer;transition:.2s var(--ease)}.aiPrimaryAction{border:1px solid rgba(52,221,177,.14);background:rgba(52,221,177,.095);color:#b8f8e7}.aiPrimaryAction:hover{transform:translateY(-1px);background:rgba(52,221,177,.14)}.aiWhy{border:1px solid var(--line);background:rgba(255,255,255,.025);color:var(--muted)}.aiWhy:hover{color:white;background:rgba(255,255,255,.05)}.aiExplain{max-height:0;opacity:0;overflow:hidden;transition:max-height .32s var(--ease),opacity .25s ease,margin .3s ease}.aiExplain.open{max-height:110px;opacity:1;margin-top:10px}.aiExplain span{display:block;padding:10px 11px;border-radius:13px;background:rgba(0,0,0,.13);color:var(--muted);font-size:11px;line-height:1.5}
+
+/* More tactile controls */
+.primary,.secondary,.pill,.doneBtn,.iconBtn,.goalControls button{transition:transform .18s var(--ease),filter .18s ease,background .18s ease,border-color .18s ease}.primary:hover,.goalControls button:hover{transform:translateY(-1px)}
+@media(max-width:520px){
+ body{font-size:14px}.brand{font-size:19px}.todayCompact h1{font-size:32px}.sectionTitle h1{font-size:34px}
+ .goalRoute{padding:16px 14px 13px;border-radius:21px}.routeTrack{margin-top:24px}.routeEnds{gap:10px}.routeEnds b{font-size:11px}.routeReady{font-size:11px}.routeExpand{gap:6px}.routeExpand>div{padding:9px 8px}
+ .aiAdvisor{padding:15px}.aiPrimaryAction,.aiWhy{min-height:38px}.compactGoal:hover,.goalCard:hover,.habitCard:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+
+
+<style id="lifeflow-v15-ai-chat">
+.aiChatOpen{border:1px solid rgba(130,104,255,.22);background:rgba(130,104,255,.12);color:#e4dfff;border-radius:12px;padding:9px 12px;font:700 11px/1 Manrope,sans-serif;cursor:pointer;transition:.2s var(--ease)}.aiChatOpen:hover{transform:translateY(-1px);background:rgba(130,104,255,.18)}
+.aiChatWrap{position:fixed;inset:0;z-index:85;background:rgba(3,7,16,.68);backdrop-filter:blur(12px);display:none;align-items:flex-end;justify-content:center;padding:18px}.aiChatWrap.open{display:flex}
+.aiChat{width:min(720px,100%);height:min(720px,88vh);display:grid;grid-template-rows:auto 1fr auto;border:1px solid rgba(255,255,255,.09);border-radius:28px;background:linear-gradient(180deg,#121a2e,#0d1424);box-shadow:0 28px 90px rgba(0,0,0,.5);overflow:hidden}
+.aiChatHead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 17px;border-bottom:1px solid var(--line)}.aiChatIdentity{display:flex;align-items:center;gap:10px}.aiChatIdentity b{display:block}.aiChatIdentity small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.aiChatClose{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:white;font-size:20px;cursor:pointer}
+.aiMessages{overflow:auto;padding:17px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}.aiMsg{max-width:84%;padding:11px 13px;border-radius:17px;font-size:13px;line-height:1.55;white-space:pre-wrap}.aiMsg.user{align-self:flex-end;background:linear-gradient(135deg,#765fff,#637cff);color:white;border-bottom-right-radius:6px}.aiMsg.bot{align-self:flex-start;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.06);color:#eef2ff;border-bottom-left-radius:6px}.aiMsgMeta{display:block;margin-top:5px;font-size:9px;color:#7f8ba2}
+.aiQuick{display:flex;gap:7px;overflow:auto;padding:0 17px 10px}.aiQuick button{flex:none;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#cdd5e7;border-radius:999px;padding:8px 10px;font:650 10px/1 Manrope,sans-serif;cursor:pointer}
+.aiComposer{border-top:1px solid var(--line);padding:12px}.aiComposerRow{display:flex;gap:8px}.aiComposer textarea{flex:1;resize:none;min-height:46px;max-height:120px;background:#0a1120;color:white;border:1px solid rgba(255,255,255,.09);border-radius:15px;padding:12px 13px;font:13px/1.4 Manrope,sans-serif;outline:none}.aiComposer textarea:focus{border-color:rgba(130,104,255,.42);box-shadow:0 0 0 3px rgba(130,104,255,.08)}.aiSend{width:48px;border:0;border-radius:15px;background:linear-gradient(135deg,var(--violet),#647eff);color:white;font-size:18px;cursor:pointer}.aiPrivacy{padding:7px 2px 0;color:#68758f;font-size:9px}
+@media(max-width:520px){.aiChatWrap{padding:0;align-items:stretch}.aiChat{height:100%;max-height:none;border-radius:0;border:0}.aiMsg{max-width:90%}.aiChatHead{padding-top:max(16px,env(safe-area-inset-top))}.aiComposer{padding-bottom:max(12px,env(safe-area-inset-bottom))}}
+</style>
+
+
+<style id="lifeflow-v17-clean-focus">
+/* v17: one clear action on Today, less dashboard noise */
+#screen-today .aiAdvisor{padding:17px 18px;margin-bottom:16px}
+#screen-today .aiAdvisorText{font-size:15px;line-height:1.55;margin-top:11px}
+#screen-today .aiAdvisorActions{margin-top:14px;align-items:center}
+#screen-today .aiPrimaryAction{min-height:42px;padding:11px 15px;font-size:12px}
+#screen-today .aiChatOpen{margin-left:auto;background:transparent;border-color:rgba(255,255,255,.08);color:var(--muted)}
+#screen-today .aiChatOpen:hover{color:white;background:rgba(255,255,255,.045)}
+#screen-today .todayTasksCard{background:rgba(17,24,43,.62)}
+#screen-today .compactGoal{background:rgba(255,255,255,.028)}
+#screen-today .compactSavingsBar{opacity:.8}
+@media(max-width:520px){
+ #screen-today .aiAdvisor{padding:15px 16px}
+ #screen-today .aiAdvisorActions{display:grid;grid-template-columns:minmax(0,1fr) auto}
+ #screen-today .aiChatOpen{margin-left:0;padding:10px 12px}
+ #screen-today .compactGoals{margin-bottom:18px}
+}
+</style>
+
+<style id="lifeflow-v18-international-focus">
+.logoRoute{font-size:0;position:relative;overflow:hidden}
+.logoRoute:after{content:"";position:absolute;width:26px;height:1px;background:rgba(255,255,255,.22);transform:rotate(-42deg);left:9px;top:22px}
+.routeLogoArrow{position:relative;z-index:2;font:800 25px/1 Manrope,sans-serif;color:white;transform:translate(1px,-1px);text-shadow:0 5px 18px rgba(255,255,255,.18)}
+#screen-today .aiAdvisorActions{display:flex;justify-content:flex-end}
+#screen-today .aiChatOpen{margin-left:0;min-height:40px;padding:10px 14px}
+.careerRoute{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:11px 0 2px;color:var(--muted);font-size:10px}
+.careerRoute span{padding:6px 8px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.025);border-radius:999px}
+.careerRoute b{color:#66738c;font-weight:700}
+@media(max-width:520px){.careerRoute{gap:5px}.careerRoute span{padding:5px 7px;font-size:9px}}
+</style>
+
+
+<style id="lifeflow-v19-chat-polish">
+/* v19: calmer, more native-feeling LifeFlow AI chat */
+.aiChatWrap{padding:22px;background:rgba(2,5,12,.76);backdrop-filter:blur(16px)}
+.aiChat{width:min(760px,100%);height:min(760px,90dvh);grid-template-rows:auto minmax(0,1fr) auto;border-radius:30px;background:linear-gradient(180deg,#111a2d 0%,#0b1221 100%);box-shadow:0 34px 110px rgba(0,0,0,.58)}
+.aiChatHead{padding:15px 16px;min-height:72px;background:rgba(255,255,255,.012)}
+.aiChatIdentity{min-width:0}.aiChatIdentity>div{min-width:0}.aiChatIdentity b{font-size:15px}.aiChatIdentity small{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:430px}
+.aiChatHeadActions{display:flex;align-items:center;gap:7px;flex:none}
+.aiChatClear{height:38px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#9aa7be;padding:0 11px;font:700 10px/1 Manrope,sans-serif;cursor:pointer;transition:.2s ease}
+.aiChatClear:hover{color:white;background:rgba(255,255,255,.06)}
+.aiChatClear.armed{color:#ffd2dc;border-color:rgba(255,113,149,.24);background:rgba(255,113,149,.08)}
+.aiChatClose{flex:none;transition:.2s ease}.aiChatClose:hover{background:rgba(255,255,255,.08)}
+.aiChatBody{min-height:0;display:grid;grid-template-rows:minmax(0,1fr) auto;overflow:hidden}
+.aiMessages{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:20px 20px 14px;gap:12px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.14) transparent}
+.aiMessages::-webkit-scrollbar{width:6px}.aiMessages::-webkit-scrollbar-thumb{background:rgba(255,255,255,.13);border-radius:99px}
+.aiMsg{position:relative;max-width:min(78%,560px);padding:12px 14px 10px;border-radius:20px;font-size:13.5px;line-height:1.55;letter-spacing:-.006em;box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.aiMsg.user{background:linear-gradient(135deg,#735cff,#627cff);border-bottom-right-radius:7px}
+.aiMsg.bot{background:#182238;border:1px solid rgba(255,255,255,.065);border-bottom-left-radius:7px;color:#f2f5ff}
+.aiMsgMeta{margin-top:6px;font-size:8.5px;opacity:.62}
+.aiMsg.user .aiMsgMeta{color:rgba(255,255,255,.7)}
+.aiEmpty{margin:auto;max-width:430px;text-align:center;padding:24px 18px;color:var(--muted)}
+.aiEmptyIcon{width:48px;height:48px;border-radius:16px;margin:0 auto 12px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(130,104,255,.18),rgba(52,221,177,.10));border:1px solid rgba(255,255,255,.06);font-size:20px;color:white}
+.aiEmpty b{display:block;color:#eef2ff;font-size:16px;margin-bottom:5px}.aiEmpty span{font-size:11px;line-height:1.5}
+.aiQuick{padding:8px 20px 12px;gap:8px;background:linear-gradient(180deg,transparent,rgba(5,9,18,.28));scrollbar-width:none}.aiQuick::-webkit-scrollbar{display:none}.aiQuick button{padding:9px 11px;font-size:10px;background:rgba(255,255,255,.03);transition:.2s ease}.aiQuick button:hover{background:rgba(255,255,255,.06);color:white}
+.aiComposer{padding:11px 12px 12px;background:rgba(6,10,20,.82);backdrop-filter:blur(14px)}
+.aiComposerRow{align-items:flex-end}.aiComposer textarea{min-height:48px;max-height:112px;border-radius:16px;padding:13px 14px;font-size:13px;line-height:1.45;background:#0a1120}
+.aiSend{height:48px;width:48px;flex:none;border-radius:16px;transition:transform .18s ease,filter .18s ease}.aiSend:hover{filter:brightness(1.08)}.aiSend:active{transform:scale(.95)}
+.aiPrivacy{padding:7px 3px 0;font-size:8.5px;line-height:1.4;color:#5f6d86}
+@media(max-width:520px){
+ .aiChatWrap{padding:0}.aiChat{width:100%;height:100dvh;max-height:none;border-radius:0;border:0}
+ .aiChatHead{padding:calc(10px + env(safe-area-inset-top)) 12px 11px;min-height:72px}.aiChatIdentity small{max-width:190px}.aiChatClear{width:38px;padding:0;font-size:0}.aiChatClear:before{content:"⌫";font-size:17px}.aiChatClear.armed:before{content:"?";font-size:15px}
+ .aiMessages{padding:18px 14px 12px;gap:11px}.aiMsg{max-width:86%;font-size:13px;padding:11px 13px 9px}.aiQuick{padding:7px 14px 10px}
+ .aiComposer{padding:10px 10px max(10px,env(safe-area-inset-bottom))}.aiPrivacy{display:none}.aiComposer textarea{font-size:16px;min-height:48px}
+}
+</style>
+
+
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<style id="lifeflow-v23-nutrition">
+.nutritionCard{margin-top:14px}.nutritionTop{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.nutritionKcal{font-size:30px;font-weight:800;letter-spacing:-.04em}.nutritionKcal small{font-size:12px;color:var(--muted);font-weight:600}.nutritionStats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}.nutritionStat{padding:11px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025)}.nutritionStat b{display:block;font-size:15px}.nutritionStat span{font-size:9px;color:var(--muted)}.nutritionTarget{display:flex;gap:8px;margin-top:12px}.nutritionTarget input{min-width:0;flex:1;background:#0c1324;color:white;border:1px solid var(--line);border-radius:13px;padding:11px}.mealList{display:grid;gap:7px;margin-top:12px}.mealRow{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:9px 10px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025)}.mealRow small{display:block;color:var(--muted);font-size:9px}.mealDelete{border:0;background:transparent;color:#7f8ba2;cursor:pointer;font-size:16px}.mealDelete:hover{color:var(--pink)}.nutritionHint{font-size:10px;color:var(--muted);margin-top:9px;line-height:1.45}.aiAttach{display:flex;gap:6px;align-items:center}.aiToolBtn{width:42px;height:42px;border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#dfe5f3;cursor:pointer;font-size:17px}.aiToolBtn.active{background:rgba(255,113,149,.13);border-color:rgba(255,113,149,.3)}.aiToolBtn:disabled{opacity:.45;cursor:wait}.aiComposerRow{align-items:flex-end}.aiFoodPreview{max-width:190px;border-radius:14px;margin-top:8px;border:1px solid var(--line)}.calorieBadge{display:inline-flex;margin-top:8px;padding:5px 8px;border-radius:999px;background:rgba(52,221,177,.09);color:#b8f8e7;font-size:9px;font-weight:700}.nutritionSetup{color:#ffc966}
+@media(max-width:520px){.nutritionStats{grid-template-columns:1fr 1fr}.nutritionStat:last-child{grid-column:1/-1}.nutritionTop{align-items:center}.nutritionKcal{font-size:26px}.aiToolBtn{width:40px;height:40px}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="shell">
+  <header class="top"><div class="brand"><div class="logo logoRoute" id="lifeLogo" title="Курс на цели" aria-label="LifeFlow"><span class="routeLogoArrow">↗</span></div>LifeFlow</div><div class="topRight"><div class="muted" id="todayLabel"></div></div></header>
+
+  <main>
+    <section class="screen active" id="screen-today">
+
+<div class="todayCompact">
+  <div>
+    <small class="muted" id="compactDate">Сегодня</small>
+    <h1>Сегодня</h1>
+  </div>
+  <div class="todayScore" id="compactDayScore">0%</div>
+</div>
+
+<div class="compactGoals">
+  <button class="compactGoal" onclick="document.querySelector('[data-screen=goals]').click()">
+    <span class="cgIcon">🇨🇴</span>
+    <span class="cgText"><small>Медельин 2027</small><b id="compactMedPct">0%</b></span>
+    <span class="cgArrow">›</span>
+  </button>
+  <button class="compactGoal" onclick="document.querySelector('[data-screen=goals]').click()">
+    <span class="cgIcon">⚖️</span>
+    <span class="cgText"><small>Вес</small><b id="compactWeight">110 → 93 кг</b></span>
+    <span class="cgArrow">›</span>
+  </button>
+  <button class="compactGoal" onclick="document.querySelector('[data-screen=goals]').click()">
+    <span class="cgIcon">🛟</span>
+    <span class="cgText"><small>Финансовая подушка</small><b id="compactBuffer">0 / 200 000 ₽</b><span class="compactSavingsBar"><i id="compactBufferFill" style="width:0%"></i></span></span>
+    <span class="cgArrow">›</span>
+  </button>
+  <button class="compactGoal" onclick="document.querySelector('[data-screen=goals]').click()">
+    <span class="cgIcon">✈️</span>
+    <span class="cgText"><small>Билет и переезд</small><b id="compactTicket">0 / 140 000 ₽</b><span class="compactSavingsBar"><i id="compactTicketFill" style="width:0%"></i></span></span>
+    <span class="cgArrow">›</span>
+  </button>
+</div>
+
+<div class="aiAdvisor" id="aiAdvisor">
+  <div class="aiAdvisorTop"><div class="aiAdvisorTitle"><span class="aiMark">✦</span><span>Умный советник</span><span class="aiPulse"></span></div><small class="muted" id="aiAdvisorTime">локальный анализ</small></div>
+  <div class="aiAdvisorText" id="aiAdvisorText">Анализирую цели, неделю и задачи…</div>
+  
+  <div class="aiAdvisorActions">
+    <button class="aiChatOpen" id="aiChatOpen">Спросить ИИ</button>
+  </div>
+</div>
+      <div class="card todayTasksCard"><div class="cardHead"><h2>Задачи на сегодня</h2><button class="pill" data-go="tasks">Все задачи</button></div><div class="tasks" id="todayTasks"></div></div>
+
+</section>
+
+    <section class="screen" id="screen-habits">
+      <div class="sectionTitle"><div><div class="muted">Система привычек</div><h1>Привычки</h1></div><button class="primary" id="newHabitTop">＋ Добавить</button></div>
+      <div class="tabs" id="categoryTabs"><button class="pill active" data-cat="english">🇬🇧 Английский</button><button class="pill" data-cat="psyche">🧠 Психика</button><button class="pill" data-cat="weight">⚖️ Похудение</button><button class="pill" data-cat="other">✨ Прочее</button></div>
+      <div class="habitGrid" id="habitGrid"></div>
+    </section>
+<section class="screen" id="screen-goals">
+  <div class="sectionTitle">
+    <div>
+      <div class="muted" style="font-size:12px">ЦЕЛИ</div>
+      <h1 style="margin:3px 0 0">Мои цели</h1>
+    </div>
+  </div>
+
+  <div class="goalHero">
+    <div class="badge">✈️ Дата переезда: 19 августа 2027</div>
+    <h2>Набережные Челны → Медельин</h2>
+    <div class="muted">Готовность к переезду считается по удалённому доходу, финансовой подушке и бюджету на билет.</div>
+
+    <div class="goalRoute" id="medRouteCard" role="button" tabindex="0" aria-expanded="false">
+      <div class="routeHeader">
+        <div><small>МАРШРУТ ЦЕЛИ</small><b>Курс на Медельин</b></div>
+        <span class="routeReady" id="routeReady">0%</span>
+      </div>
+      <div class="routeTrack">
+        <span class="routePoint startPoint"></span>
+        <div class="routeLine">
+          <div class="routeFill" id="medRouteFill" style="width:0%"></div>
+          <div class="routeGlow" id="medRouteGlow" style="width:0%"></div>
+          <div class="plane" id="medPlane" style="left:0%">✈️</div>
+        </div>
+        <span class="routePoint endPoint"></span>
+      </div>
+      <div class="routeEnds"><span><b>Набережные Челны</b><small>Старт</small></span><span><b>Медельин 🇨🇴</b><small>Цель · 19.08.2027</small></span></div>
+      <div class="routeExpand" id="routeExpand">
+        <div><small>Доход</small><b id="routeIncomePct">0%</b></div>
+        <div><small>Подушка</small><b id="routeBufferPct">0%</b></div>
+        <div><small>Переезд</small><b id="routeTicketPct">0%</b></div>
+      </div>
+      <div class="routeTapHint" id="routeTapHint">Нажми для деталей</div>
+    </div>
+
+    <div class="goalMeta" style="grid-template-columns:repeat(2,1fr)">
+      <div class="goalMini"><b id="medReadyMini">0%</b><span>готовность</span></div>
+            <div class="goalMini"><b id="medMonthsMini">12</b><span>месяцев до цели</span></div>
+    </div>
+  </div>
+<div class="goalScoreWrap card">
+    <div class="goalRing" id="medRing" style="--p:0">
+      <div class="goalRingInner"><b id="medReady">0%</b><span class="muted">готовность</span></div>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Что двигает цель</h3>
+      <div class="goalList">
+        <div class="goalRow"><span>💻</span><div class="grow"><b>Удалённый доход</b><small>Цель: 70 000 ₽/мес · международная удалённая работа через разработку сайтов</small></div><span class="goalTag" id="incomePctTag">0%</span></div>
+        <div class="goalRow"><span>🛟</span><div class="grow"><b>Финансовая подушка</b><small>Цель: 200 000 ₽</small></div><span class="goalTag" id="bufferPctTag">0%</span></div>
+        <div class="goalRow"><span>✈️</span><div class="grow"><b>Билет и переезд</b><small>Цель: 140 000 ₽</small></div><span class="goalTag" id="ticketPctTag">0%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="goalSectionTitle"><h3>Финансы</h3><span class="muted">можно менять вручную</span></div>
+  <div class="goalGrid">
+    <div class="goalCard" id="incomeGoalCard">
+      <div class="goalCardTop"><div><small class="muted">Удалённый доход</small><div class="goalValue" id="incomeValue">0 ₽</div></div><span>💻</span></div>
+      <div class="goalBar"><i id="incomeBar" style="width:0%"></i></div>
+      <div class="goalControls"><input id="incomeInput" type="number" min="0" step="1000" placeholder="Удалённый доход для переезда"><button id="saveIncome">Сохранить</button></div>
+    </div>
+
+    <div class="goalCard" id="bufferGoalCard">
+      <div class="goalCardTop"><div><small class="muted">Финансовая подушка</small><div class="goalValue" id="bufferValue">0 ₽</div></div><span>🛟</span></div>
+      <div class="goalBar"><i id="bufferBar" style="width:0%"></i></div>
+      <div class="goalControls"><input id="bufferInput" type="number" min="0" step="1000" placeholder="Сколько накоплено"><button id="saveBuffer">Сохранить</button></div>
+    </div>
+
+    <div class="goalCard">
+      <div class="goalCardTop"><div><small class="muted">Билет и переезд</small><div class="goalValue" id="ticketValue">0 ₽</div></div><span>✈️</span></div>
+      <div class="goalBar"><i id="ticketBar" style="width:0%"></i></div>
+      <div class="goalControls"><input id="ticketInput" type="number" min="0" step="1000" placeholder="Сколько отложено"><button id="saveTicket">Сохранить</button></div>
+    </div>
+
+    <div class="goalCard">
+      <div class="goalCardTop"><div><small class="muted">Общие накопления</small><div class="goalValue" id="totalSavedValue">0 ₽</div></div><span>💰</span></div>
+      <div class="goalBar"><i id="totalSavedBar" style="width:0%"></i></div>
+      <small class="muted">Ориентир: 340 000 ₽ на подушку + переезд.</small>
+    </div>
+  </div>
+
+<div class="goalSectionTitle"><h3>Похудение</h3><span class="muted">110 → 93 кг · ориентир 15.04.2027</span></div>
+<div class="goalCard" id="weightGoalCard">
+  <div class="goalCardTop">
+    <div>
+      <small class="muted">Текущий вес</small>
+      <div class="goalValue" id="weightCurrent">110 кг</div>
+    </div>
+    <span style="font-size:28px">⚖️</span>
+  </div>
+  <div class="goalBar"><i id="weightBar" style="width:0%"></i></div>
+  <div style="display:flex;justify-content:space-between;margin-top:8px">
+    <small class="muted">Старт: 110 кг</small>
+    <small class="muted">Цель: 93 кг · 15.04.2027</small>
+  </div>
+  <div class="goalControls">
+    <input id="weightInput" type="number" min="50" max="200" step="0.1" placeholder="Введите текущий вес">
+    <button id="saveWeight">Сохранить</button>
+  </div>
+  <div class="goalMeta" style="grid-template-columns:repeat(3,1fr);margin-top:14px">
+    <div class="goalMini"><b id="weightLost">0 кг</b><span>сброшено</span></div>
+    <div class="goalMini"><b id="weightLeft">17 кг</b><span>осталось</span></div>
+    <div class="goalMini"><b id="weightPct">0%</b><span>прогресс</span></div>
+  </div>
+  <div class="aiNote" style="margin-top:14px">🎯 Ориентир: <b>15 апреля 2027</b> · темп около 0,5 кг/неделю. Дата будет уточняться по фактической динамике веса.</div>
+  <div style="margin-top:14px">
+    <small class="muted">Последние записи</small>
+    <div id="weightHistory" class="goalList" style="margin-top:8px"></div>
+  </div>
+</div>
+
+<div class="goalCard nutritionCard" id="nutritionGoalCard">
+  <div class="nutritionTop">
+    <div><small class="muted">Калории сегодня</small><div class="nutritionKcal"><span id="calToday">0</span> <small>ккал</small></div></div>
+    <span style="font-size:28px">🍽️</span>
+  </div>
+  <div class="goalBar"><i id="calorieBar" style="width:0%"></i></div>
+  <div class="nutritionStats">
+    <div class="nutritionStat"><b id="calLeft">—</b><span>ОСТАЛОСЬ СЕГОДНЯ</span></div>
+    <div class="nutritionStat"><b id="calWeek">0</b><span>ККАЛ ЗА 7 ДНЕЙ</span></div>
+    <div class="nutritionStat"><b id="calWeekBalance">—</b><span>БАЛАНС НЕДЕЛИ</span></div>
+  </div>
+  <div class="nutritionTarget"><input id="calorieTargetInput" type="number" min="1400" max="4500" step="50" placeholder="Дневная цель, ккал"><button class="primary" id="saveCalorieTarget">Сохранить</button></div>
+  <div class="nutritionHint" id="calorieTargetHint">Автоматический расчёт: мужчина · 27 лет · 190 см · средняя активность. Цель корректируется вместе с весом; ручное значение можно задать выше.</div>
+  <div style="margin-top:14px"><small class="muted">Сегодня съедено</small><div class="mealList" id="mealList"></div></div>
+</div>
+
+</section>
+
+<section class="screen" id="screen-tasks">
+      <div class="sectionTitle"><div><div class="muted">Планирование</div><h1>Задачи</h1></div></div>
+      <div class="card"><div class="taskFilters"><button class="pill taskFilter active" data-filter="today">Сегодня</button><button class="pill taskFilter" data-filter="tomorrow">Завтра</button><button class="pill taskFilter" data-filter="other">Другой день</button></div><input id="taskDate" type="date" style="display:none;width:100%;background:#0c1324;color:white;border:1px solid var(--line);border-radius:13px;padding:12px;margin-bottom:12px"><div class="tasks" id="allTasks"></div><div class="inputRow"><input id="taskInput" placeholder="Добавить задачу…"><button class="primary" id="addTask">Добавить</button></div></div>
+    </section>
+  </main>
+</div>
+
+<nav class="bottomNav"><button class="navBtn active" data-screen="today"><span>◉</span><small>Сегодня</small></button><button class="navBtn" data-screen="habits"><span>✓</span><small>Привычки</small></button><button class="navBtn" data-screen="goals"><span>◎</span><small>Цели</small></button><button class="navBtn" data-screen="tasks"><span>☰</span><small>Задачи</small></button></nav>
+
+
+<div class="aiChatWrap" id="aiChatWrap" aria-hidden="true">
+  <section class="aiChat" role="dialog" aria-modal="true" aria-labelledby="aiChatTitle">
+    <div class="aiChatHead">
+      <div class="aiChatIdentity"><span class="aiMark">✦</span><div><b id="aiChatTitle">LifeFlow AI</b><small>помогает разбирать твои данные, цели и следующий шаг</small></div></div>
+      <div class="aiChatHeadActions"><button class="aiChatClear" id="aiChatClear" aria-label="Очистить диалог" title="Очистить диалог">Очистить</button><button class="aiChatClose" id="aiChatClose" aria-label="Закрыть">×</button></div>
+    </div>
+    <div class="aiChatBody">
+      <div class="aiMessages" id="aiMessages"></div>
+      <div class="aiQuick" id="aiQuick">
+        <button data-aiq="Что мне делать сегодня?">Что делать сегодня?</button>
+        <button data-aiq="Как у меня дела с переездом в Медельин?">Медельин</button>
+        <button data-aiq="Что с моим весом?">Вес</button><button data-aiq="Сколько калорий у меня сегодня?">Калории</button>
+        <button data-aiq="Где у меня самое слабое место?">Слабое место</button>
+      </div>
+    </div>
+    <div class="aiComposer"><div class="aiComposerRow"><textarea id="aiInput" rows="1" placeholder="Напиши, что съел и сколько…"></textarea><button class="aiSend" id="aiSend" aria-label="Отправить">➜</button></div></div>
+  </section>
+</div>
+
+<div class="modalWrap" id="habitModal"><div class="modal"><h2 id="modalTitle">Новая привычка</h2><div class="field"><label>Название</label><input id="habitName" placeholder="Например: медитация"></div><div class="field"><label>Категория</label><select id="habitCat"><option value="english">Английский язык</option><option value="psyche">Психика</option><option value="other">Прочее</option><option value="weight">Похудение</option></select></div><div class="field"><label>Описание / цель</label><input id="habitGoal" placeholder="Например: 20 минут"></div><div class="field"><label>Сколько раз в неделю</label><input id="habitWeekly" type="number" min="1" max="7" value="7"></div><div class="modalActions"><button class="secondary" id="cancelHabit">Отмена</button><button class="primary" id="saveHabit">Сохранить</button></div></div></div>
+
+<script>
+const STORE='lifeflow-app-v3', START='2026-08-19';
+const seed={habits:[
+{id:'anki',cat:'english',icon:'🧠',name:'Anki',goal:'15–20 фраз в день',weekly:7},
+{id:'read',cat:'english',icon:'📚',name:'Чтение',goal:'20–30 минут · 6/7 дней',weekly:6},
+{id:'native',cat:'english',icon:'🗣️',name:'Общение с носителем',goal:'20–30 минут · 2–3 раза в неделю',weekly:3},
+{id:'sleep',cat:'psyche',icon:'😴',name:'Сон',goal:'23:00 → 08:00 · ежедневно',weekly:7},
+{id:'walk',cat:'psyche',icon:'🚶',name:'Активная ходьба',goal:'1 час · 6/7 дней',weekly:6},
+{id:'strength',cat:'psyche',icon:'🏋️',name:'Силовые тренировки',goal:'3/7 дней',weekly:3},
+{id:'antidepressants',cat:'psyche',icon:'💊',name:'Антидепрессанты',goal:'Снижение по плану',weekly:7},
+{id:'digital',cat:'other',icon:'💻',name:'Цифровизация',goal:'Развитие цифровой системы',weekly:7},
+{id:'cleanhome',cat:'other',icon:'🏠',name:'Чистый дом',goal:'Поддерживать порядок',weekly:7},
+{id:'appearance',cat:'other',icon:'✨',name:'Внешний вид',goal:'Уход и внешний вид',weekly:7},
+{id:'noeat18',cat:'weight',icon:'🌙',name:'Не есть после 18:00',goal:'Не есть после 18:00',weekly:7},
+{id:'caloriegoal',cat:'weight',icon:'🎯',name:'Соблюдать калорийность',goal:'Уложиться в дневной калораж',weekly:7},
+{id:'nosugar',cat:'weight',icon:'🍬',name:'Без сахара',goal:'Не есть добавленный сахар в течение дня',weekly:7}],checks:{},todos:{}};
+let state=JSON.parse(localStorage.getItem(STORE)||'null')||seed, activeCat='english', taskFilter='today', editing=null;
+const obsoleteHabitNames=['разработка приложений','портфолио','цифровые навыки','накопления'];
+const beforeCleanup=state.habits.length;
+state.habits=state.habits.filter(h=>{const n=String(h.name||'').toLowerCase().trim();return !obsoleteHabitNames.some(x=>n.includes(x))&&!n.includes('международ');});
+if(state.habits.length!==beforeCleanup)localStorage.setItem(STORE,JSON.stringify(state));
+const requiredWeightHabits=[
+{id:'noeat18',cat:'weight',icon:'🌙',name:'Не есть после 18:00',goal:'Не есть после 18:00',weekly:7},
+{id:'caloriegoal',cat:'weight',icon:'🎯',name:'Соблюдать калорийность',goal:'Уложиться в дневной калораж',weekly:7},
+{id:'nosugar',cat:'weight',icon:'🍬',name:'Без сахара',goal:'Не есть добавленный сахар в течение дня',weekly:7}
+];
+let weightHabitChanged=false;requiredWeightHabits.forEach(h=>{if(!state.habits.some(x=>x.id===h.id)){state.habits.push(h);weightHabitChanged=true}});if(weightHabitChanged)save?.();
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function dObj(s){const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12)}
+function fmt(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function day(off=0){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+off);return fmt(d)}
+function save(){localStorage.setItem(STORE,JSON.stringify(state))}
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1500)}
+function go(screen){$$('.screen').forEach(x=>x.classList.toggle('active',x.id===`screen-${screen}`));$$('.navBtn').forEach(x=>x.classList.toggle('active',x.dataset.screen===screen));if(screen==='today')renderToday();if(screen==='habits')renderHabits();if(screen==='tasks')renderTasks();if(screen==='goals'&&window.renderMedellinGoal)window.renderMedellinGoal()}
+function score(date, habits=state.habits){if(!habits.length)return 0;return Math.round(habits.filter(h=>state.checks[date+'|'+h.id]).length/habits.length*100)}
+function weeklyHits(h){return [0,1,2,3,4,5,6].filter(i=>state.checks[day(-i)+'|'+h.id]).length}
+function toggleHabit(id){const k=day()+'|'+id;state.checks[k]=!state.checks[k];save();renderToday();renderHabits();toast(state.checks[k]?'Отмечено ✓':'Отметка снята')}
+function renderToday(){
+ const active=state.habits,done=active.filter(h=>state.checks[day()+'|'+h.id]).length,p=active.length?Math.round(done/active.length*100):0;
+ const td=state.todos[day()]||[];
+ $('#todayTasks').innerHTML=td.length?td.slice(0,4).map((t,i)=>`<div class="task ${t.done?'done':''}"><input type="checkbox" data-todaytask="${i}" ${t.done?'checked':''}><div class="taskText">${esc(t.text)}</div></div>`).join(''):'<div class="muted">На сегодня задач нет ✨</div>';
+ $$('[data-todaytask]').forEach(x=>x.onchange=()=>{td[+x.dataset.todaytask].done=x.checked;save();renderToday()});
+ if(window.renderAiAdvisor)window.renderAiAdvisor();if(window.syncCompact)window.syncCompact();
+}
+function renderHabits(){const list=state.habits.filter(h=>h.cat===activeCat);$('#habitGrid').innerHTML=list.map(h=>{const hits=weeklyHits(h),pct=Math.min(100,Math.round(hits/h.weekly*100)),done=!!state.checks[day()+'|'+h.id];const dots=[6,5,4,3,2,1,0].map((off,i)=>`<div class="dot ${state.checks[day(-off)+'|'+h.id]?'hit':''}">${['П','В','С','Ч','П','С','В'][i]}</div>`).join('');return `<div class="habitCard"><div class="habitTop"><div style="display:flex;gap:12px;min-width:0"><div class="ico">${h.icon}</div><div style="min-width:0"><h3 style="margin:1px 0 4px;font-size:17px">${esc(h.name)}</h3><small class="muted">${esc(h.goal)}</small></div></div><div class="habitActions"><button class="iconBtn" data-edit="${h.id}" title="Редактировать">✎</button><button class="iconBtn danger" data-delete="${h.id}" title="Удалить">×</button></div></div><div class="bar"><i style="width:${pct}%"></i></div><div style="display:flex;justify-content:space-between;align-items:center"><small class="muted">Прогресс недели</small><small style="font-weight:700">${hits}/${h.weekly}</small></div><div class="weekDots">${dots}</div><div class="habitFooter"><button class="doneBtn ${done?'done':''}" data-toggle="${h.id}"><span>${done?'✓':'○'}</span><span>${done?'Выполнено сегодня':'Отметить сегодня'}</span></button></div></div>`}).join('')||'<div class="muted">В этой категории пока нет привычек.</div>';$$('[data-toggle]').forEach(b=>b.onclick=()=>toggleHabit(b.dataset.toggle));$$('[data-delete]').forEach(b=>b.onclick=()=>removeHabit(b.dataset.delete));$$('[data-edit]').forEach(b=>b.onclick=()=>openHabit(b.dataset.edit))}
+function removeHabit(id){const h=state.habits.find(x=>x.id===id);if(!h)return;if(confirm(`Удалить «${h.name}» и её историю?`)){state.habits=state.habits.filter(x=>x.id!==id);Object.keys(state.checks).filter(k=>k.endsWith('|'+id)).forEach(k=>delete state.checks[k]);save();renderHabits();renderToday();toast('Привычка удалена')}}
+function openHabit(id=null){editing=id;const h=state.habits.find(x=>x.id===id);$('#modalTitle').textContent=h?'Редактировать привычку':'Новая привычка';$('#habitName').value=h?.name||'';$('#habitCat').value=h?.cat||activeCat;$('#habitGoal').value=h?.goal||'';$('#habitWeekly').value=h?.weekly||7;$('#habitModal').classList.add('open')}
+function closeHabit(){$('#habitModal').classList.remove('open');editing=null}
+function esc(s=''){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function selectedTaskDate(){if(taskFilter==='today')return day();if(taskFilter==='tomorrow')return day(1);return $('#taskDate').value||day()}
+function renderTasks(){const ds=selectedTaskDate(),arr=state.todos[ds]||[];$('#allTasks').innerHTML=arr.length?arr.map((t,i)=>`<div class="task ${t.done?'done':''}"><input type="checkbox" data-task="${i}" ${t.done?'checked':''}><div class="taskText">${esc(t.text)}</div><div class="taskDate">${ds.slice(5).replace('-','.')}</div><button class="iconBtn danger" data-del-task="${i}">×</button></div>`).join(''):'<div class="muted">Задач пока нет.</div>';$$('[data-task]').forEach(x=>x.onchange=()=>{arr[+x.dataset.task].done=x.checked;save();renderTasks();renderToday()});$$('[data-del-task]').forEach(x=>x.onclick=()=>{arr.splice(+x.dataset.delTask,1);save();renderTasks();renderToday()})}
+
+function flashAndFocus(id){const el=document.getElementById(id);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('flashTarget');void el.offsetWidth;el.classList.add('flashTarget')}
+function aiDaysBetween(a,b){return Math.round((b-a)/(1000*60*60*24))}
+function aiParseRuDate(s){
+ const m=String(s||'').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+ return m?new Date(+m[3],+m[2]-1,+m[1],12):null;
+}
+function aiClamp(n,min=0,max=100){return Math.max(min,Math.min(max,n))}
+function aiAdvisorSuggestion(){
+ const g=JSON.parse(localStorage.getItem('lifeflow-medellin-v1')||'{"income":0,"buffer":0,"ticket":0,"targetDate":"2027-08-19"}');
+ const w=JSON.parse(localStorage.getItem('lifeflow-weight-v1')||'{"current":110,"history":[]}');
+ const habits=state.habits||[], checks=state.checks||{}, today=day(), tomorrow=day(1), now=new Date(), hour=now.getHours();
+ const todos=state.todos||{};
+ const todayTasks=(todos[today]||[]).filter(t=>!t.done);
+ const tomorrowTasks=(todos[tomorrow]||[]).filter(t=>!t.done);
+ const overdue=[];
+ Object.keys(todos).filter(ds=>ds<today).sort().forEach(ds=>(todos[ds]||[]).forEach((t,i)=>{if(!t.done)overdue.push({text:t.text,date:ds,index:i})}));
+
+ // Habit analysis respects each habit's own weekly target instead of treating everything as 7/7.
+ const goalWeights={anki:10,native:10,read:8,digital:9,sleep:7,walk:7,strength:7,antidepressants:5,cleanhome:3,appearance:3};
+ const habitStats=habits.map(h=>{
+   let hits=0,lastHitAgo=99;
+   for(let i=0;i<7;i++){if(checks[day(-i)+'|'+h.id]){hits++;if(lastHitAgo===99)lastHitAgo=i}}
+   const weekly=Math.max(1,Number(h.weekly)||7);
+   const pct=aiClamp(Math.round(hits/weekly*100));
+   const remaining=Math.max(0,weekly-hits);
+   const doneToday=!!checks[today+'|'+h.id];
+   const weight=goalWeights[h.id]||3;
+   // Larger score when important, behind target, not done today, and absent for several days.
+   const need=(100-pct)/100;
+   const score=Math.round(weight*7*need + remaining*4 + (!doneToday?8:0) + Math.min(12,lastHitAgo*2));
+   return {h,hits,weekly,pct,remaining,doneToday,lastHitAgo,weight,score};
+ }).sort((a,b)=>b.score-a.score);
+ const focusHabit=habitStats.find(x=>!x.doneToday&&x.remaining>0);
+ const habitPct=habits.length?Math.round(habits.filter(h=>checks[today+'|'+h.id]).length/habits.length*100):0;
+ const weeklyTarget=habitStats.reduce((s,x)=>s+x.weekly,0);
+ const weeklyHits=habitStats.reduce((s,x)=>s+Math.min(x.hits,x.weekly),0);
+ const weekPct=weeklyTarget?Math.round(weeklyHits/weeklyTarget*100):0;
+
+ // Goal gaps and deadline pressure.
+ const income=Number(g.income)||0, buffer=Number(g.buffer)||0, ticket=Number(g.ticket)||0;
+ const incomePct=Math.round(aiClamp(income/70000*100));
+ const bufferPct=Math.round(aiClamp(buffer/200000*100));
+ const ticketPct=Math.round(aiClamp(ticket/140000*100));
+ const savings=buffer+ticket, savingsPct=Math.round(aiClamp(savings/340000*100));
+ const targetDate=new Date((g.targetDate||'2027-08-19')+'T12:00:00');
+ const daysLeft=Math.max(0,aiDaysBetween(now,targetDate));
+ const months=Math.max(1,daysLeft/30.44);
+ const incomeGap=Math.max(0,70000-income), bufferGap=Math.max(0,200000-buffer), ticketGap=Math.max(0,140000-ticket);
+ const monthlySavingsNeeded=Math.round((bufferGap+ticketGap)/months/1000)*1000;
+ const deadlinePressure=daysLeft<180?1.35:daysLeft<365?1.18:1;
+
+ // Weight: use real dated entries, recency and short trend.
+ const history=(Array.isArray(w.history)?w.history:[]).map(x=>({weight:Number(x.weight),date:aiParseRuDate(x.date)})).filter(x=>Number.isFinite(x.weight));
+ const recent=history.slice(-5);
+ const currentWeight=Number(w.current)||110;
+ let weightDelta=null, weightTrend='данных пока мало', lastWeightDays=null;
+ if(recent.length>=2){weightDelta=Math.round((recent[recent.length-1].weight-recent[0].weight)*10)/10;weightTrend=weightDelta<-.2?`−${Math.abs(weightDelta).toString().replace('.',',')} кг за последние записи`:weightDelta>.2?`+${weightDelta.toString().replace('.',',')} кг за последние записи`:'вес примерно стабилен'}
+ const lastWeightDate=recent.at(-1)?.date;
+ if(lastWeightDate)lastWeightDays=Math.max(0,aiDaysBetween(lastWeightDate,now));
+
+ // Build independent candidates then rank them.
+ const c=[];
+ const add=(id,score,text,reason,actionLabel,action,tag)=>c.push({id,score:Math.round(score),text,reason,actionLabel,action,tag});
+
+ if(overdue.length){
+   add('overdue',100+Math.min(25,overdue.length*6),
+     `Есть ${overdue.length} просроченн${overdue.length===1?'ая задача':'ые задачи'}. Начни с «${overdue[0].text}» — это сейчас самый срочный хвост.`,
+     `Просроченные задачи получают максимальный приоритет, потому что уже вышли за назначенную дату. После них советник снова пересчитает фокус.`,
+     'Разобрать задачи',{type:'tasks'},'срочно');
+ }
+ if(todayTasks.length){
+   add('todayTask',88+Math.min(12,todayTasks.length*3),
+     `Лучший конкретный шаг сейчас — «${todayTasks[0].text}». Закрой её до перехода к менее срочным целям.`,
+     `На сегодня осталось ${todayTasks.length} задач. Задача с конкретной датой приоритетнее абстрактного улучшения показателей.`,
+     'Открыть задачи',{type:'tasks'},'сегодня');
+ }
+ if(focusHabit){
+   const hs=focusHabit;
+   const timeBoost=(hour>=10&&hour<21)?10:0;
+   add('habit:'+hs.h.id,55+hs.score+timeBoost,
+     `По системе привычек сейчас выгоднее всего «${hs.h.name}»: ${hs.hits}/${hs.weekly} за последние 7 дней.`,
+     `Норма этой привычки — ${hs.weekly} раз в неделю, осталось ${hs.remaining}. Вклад в цели: ${hs.weight>=9?'высокий':hs.weight>=6?'средний':'поддерживающий'}. Я учитываю именно её недельную норму, а не требую 7/7.`,
+     `Открыть «${hs.h.name}»`,{type:'habit',id:hs.h.id,cat:hs.h.cat},'привычки');
+ }
+ if(incomePct<100){
+   const score=(48+(100-incomePct)*.48)*deadlinePressure;
+   const linked=habitStats.find(x=>!x.doneToday&&['digital','anki','native','read'].includes(x.h.id));
+   add('income',score,
+     `Самый большой стратегический разрыв до Медельина — удалённый доход: ${income.toLocaleString('ru-RU')} из 70 000 ₽/мес.`,
+     `До цели не хватает ${incomeGap.toLocaleString('ru-RU')} ₽/мес, до переезда около ${Math.ceil(months)} мес. ${linked?`Из уже существующих привычек ближе всего к этой цели «${linked.h.name}».`:'Новых привычек я автоматически не создаю.'}`,
+     linked?`Открыть «${linked.h.name}»`:'Открыть цель дохода',
+     linked?{type:'habit',id:linked.h.id,cat:linked.h.cat}:{type:'income'},'Медельин');
+ }
+ if(savingsPct<100){
+   const score=(42+(100-savingsPct)*.35)*deadlinePressure;
+   add('savings',score,
+     `На переезд накоплено ${savings.toLocaleString('ru-RU')} из 340 000 ₽. При текущем остатке ориентир — около ${monthlySavingsNeeded.toLocaleString('ru-RU')} ₽ в месяц.`,
+     `Подушка готова на ${bufferPct}%, бюджет переезда — на ${ticketPct}%. Расчёт темпа делит оставшиеся ${(bufferGap+ticketGap).toLocaleString('ru-RU')} ₽ на оставшееся время до цели.`,
+     'Обновить накопления',{type:'savings'},'финансы');
+ }
+ if(currentWeight>93){
+   let score=38;
+   if(lastWeightDays===null)score+=15;
+   else if(lastWeightDays>=7)score+=18;
+   else if(lastWeightDays>=3)score+=8;
+   if(weightDelta!==null&&weightDelta>0)score+=12;
+   if(hour>=18)score+=8;
+   add('weight',score,
+     lastWeightDays===null?`По цели веса сейчас ${currentWeight} кг → 93 кг. Для анализа тренда нужна хотя бы ещё одна запись.`:
+     `Вес сейчас ${currentWeight} кг → 93 кг; ${weightTrend}${lastWeightDays>0?`. Последняя запись была ${lastWeightDays} дн. назад`:''}.`,
+     `До цели осталось ${Math.max(0,Math.round((currentWeight-93)*10)/10).toString().replace('.',',')} кг. Советник не оценивает похудение по одному дню — использует несколько последних записей и давность измерения.`,
+     'Открыть вес',{type:'weight'},'вес');
+ }
+ if(tomorrowTasks.length && hour>=18){
+   add('tomorrow',42+tomorrowTasks.length*3,
+     `Сегодняшний хвост почти закрыт. На завтра уже есть ${tomorrowTasks.length} задач${tomorrowTasks[0]?`: первая — «${tomorrowTasks[0].text}»`:''}.`,
+     `Вечером советник слегка повышает приоритет завтрашнего плана, но только если нет более срочной задачи сегодня.`,
+     'Посмотреть завтра',{type:'tasksTomorrow'},'завтра');
+ }
+
+ // Stable fallback.
+ if(!c.length){
+   add('steady',30,
+     `Критичных провалов сейчас нет: сегодня ${habitPct}%, недельная норма ${weekPct}%. Сохраняй темп.`,
+     `Доход ${incomePct}%, накопления ${savingsPct}%. Советник не создаёт новые цели или привычки, когда текущая система движется нормально.`,
+     'Открыть цели',{type:'goals'},'стабильно');
+ }
+
+ c.sort((a,b)=>b.score-a.score);
+ // Confidence is relative separation of #1 from alternatives plus data richness.
+ const top=c[0], second=c[1];
+ const separation=second?Math.max(0,top.score-second.score):25;
+ const dataRichness=Math.min(25,habitStats.length*2 + history.length*2 + Object.keys(todos).length);
+ const confidence=aiClamp(Math.round(55+separation*.8+dataRichness*.6),58,94);
+ return {candidates:c.slice(0,4),habitPct,weekPct,incomePct,savingsPct,confidence};
+}
+let currentAiAction={type:'goals'}, currentAiIndex=0, currentAiResult=null;
+function runAiAction(){
+ const a=currentAiAction||{type:'goals'};
+ if(a.type==='tasks'){go('tasks');return}
+ if(a.type==='tasksTomorrow'){go('tasks');setTimeout(()=>{const b=document.querySelector('.taskFilter[data-filter="tomorrow"]');if(b)b.click()},60);return}
+ if(a.type==='habit'){
+   go('habits');setTimeout(()=>{const tab=document.querySelector(`#categoryTabs .pill[data-cat="${a.cat}"]`);if(tab)tab.click();const card=[...document.querySelectorAll('.habitCard')].find(x=>x.textContent.includes((state.habits.find(h=>h.id===a.id)||{}).name||''));if(card){card.scrollIntoView({behavior:'smooth',block:'center'});card.classList.add('flashTarget');setTimeout(()=>card.classList.remove('flashTarget'),1300)}},70);return
+ }
+ if(a.type==='income'){go('goals');setTimeout(()=>flashAndFocus('incomeGoalCard'),80);return}
+ if(a.type==='savings'){go('goals');setTimeout(()=>flashAndFocus('bufferGoalCard'),80);return}
+ if(a.type==='weight'){go('goals');setTimeout(()=>flashAndFocus('weightGoalCard'),80);return}
+ go('goals');
+}
+function renderAiAdvisor(preserveIndex=false){
+ const box=$('#aiAdvisorText'),time=$('#aiAdvisorTime'),actionBtn=$('#aiPrimaryAction');if(!box)return;
+ const a=aiAdvisorSuggestion();currentAiResult=a;
+ if(!preserveIndex)currentAiIndex=0;
+ currentAiIndex=Math.min(currentAiIndex,a.candidates.length-1);
+ const pick=a.candidates[currentAiIndex]||a.candidates[0];
+ currentAiAction=pick.action;box.textContent=pick.text;if(actionBtn)actionBtn.textContent=pick.actionLabel;
+ if(time)time.textContent=new Intl.DateTimeFormat('ru-RU',{hour:'2-digit',minute:'2-digit'}).format(new Date());
+}
+function showNextAiSuggestion(){
+ const a=currentAiResult||aiAdvisorSuggestion();if(!a.candidates.length)return;
+ currentAiIndex=(currentAiIndex+1)%a.candidates.length;renderAiAdvisor(true);
+}
+window.renderAiAdvisor=renderAiAdvisor;
+setInterval(()=>renderAiAdvisor(false),30*60*1000);
+$$('.navBtn').forEach(b=>b.onclick=()=>go(b.dataset.screen));$$('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));$$('#categoryTabs .pill').forEach(b=>b.onclick=()=>{$$('#categoryTabs .pill').forEach(x=>x.classList.remove('active'));b.classList.add('active');activeCat=b.dataset.cat;renderHabits()});$$('.taskFilter').forEach(b=>b.onclick=()=>{$$('.taskFilter').forEach(x=>x.classList.remove('active'));b.classList.add('active');taskFilter=b.dataset.filter;$('#taskDate').style.display=taskFilter==='other'?'block':'none';renderTasks()});$('#taskDate').value=day();$('#taskDate').min=START;$('#taskDate').onchange=renderTasks;$('#addTask').onclick=()=>{const text=$('#taskInput').value.trim();if(!text)return;const ds=selectedTaskDate();(state.todos[ds]??=[]).push({text,done:false});$('#taskInput').value='';save();renderTasks();renderToday();toast('Задача добавлена')};$('#taskInput').onkeydown=e=>{if(e.key==='Enter')$('#addTask').click()};$('#newHabitTop').onclick=()=>openHabit();$('#cancelHabit').onclick=closeHabit;$('#saveHabit').onclick=()=>{const name=$('#habitName').value.trim();if(!name)return;const obj={id:editing||'h'+Date.now(),cat:$('#habitCat').value,icon:editing?(state.habits.find(x=>x.id===editing)?.icon||'✨'):'✨',name,goal:$('#habitGoal').value.trim()||'Своя цель',weekly:Math.max(1,Math.min(7,+$('#habitWeekly').value||7))};if(editing){const i=state.habits.findIndex(x=>x.id===editing);state.habits[i]=obj}else state.habits.push(obj);save();activeCat=obj.cat;$$('#categoryTabs .pill').forEach(x=>x.classList.toggle('active',x.dataset.cat===activeCat));closeHabit();renderHabits();renderToday();toast(editing?'Привычка обновлена':'Привычка добавлена')};
+
+const routeCard=$('#medRouteCard');
+if(routeCard){const toggleRoute=()=>{const open=routeCard.classList.toggle('expanded');routeCard.setAttribute('aria-expanded',String(open));const hint=$('#routeTapHint');if(hint)hint.textContent=open?'Скрыть детали':'Нажми для деталей'};routeCard.onclick=toggleRoute;routeCard.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleRoute()}}}
+
+$('#todayLabel').textContent=new Intl.DateTimeFormat('ru-RU',{weekday:'long',day:'numeric',month:'long'}).format(new Date());
+renderToday();renderHabits();renderTasks();if(window.syncCompact)window.syncCompact();renderAiAdvisor();
+if('serviceWorker' in navigator && location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+
+<script id="goal-v3-script">
+(function(){
+  const GOAL_KEY='lifeflow-medellin-v1';
+  const defaults={income:0,currentSalary:20000,buffer:0,ticket:0,targetDate:'2027-08-19'};
+  let g=JSON.parse(localStorage.getItem(GOAL_KEY)||'null')||defaults;
+
+  const money=n=>new Intl.NumberFormat('ru-RU').format(Math.round(Number(n)||0))+' ₽';
+  const clamp=(n,a=0,b=100)=>Math.max(a,Math.min(b,n));
+  const q=s=>document.querySelector(s);
+
+  function monthsLeft(){
+    const now=new Date(), end=new Date(g.targetDate+'T12:00:00');
+    return Math.max(0,Math.ceil((end-now)/(1000*60*60*24*30.44)));
+  }
+  function render(){
+    const incomePct=clamp(g.income/70000*100);
+    const bufferPct=clamp(g.buffer/200000*100);
+    const ticketPct=clamp(g.ticket/140000*100);
+    // Real readiness weighted mostly by hard requirements.
+    const readiness=Math.round(incomePct*.45+bufferPct*.30+ticketPct*.25);
+    const route=clamp(readiness);
+
+    q('#incomeValue').textContent=money(g.income);
+    q('#bufferValue').textContent=money(g.buffer);
+    q('#ticketValue').textContent=money(g.ticket);
+    q('#totalSavedValue').textContent=money(g.buffer+g.ticket);
+
+    q('#incomeBar').style.width=incomePct+'%';
+    q('#bufferBar').style.width=bufferPct+'%';
+    q('#ticketBar').style.width=ticketPct+'%';
+    q('#totalSavedBar').style.width=clamp((g.buffer+g.ticket)/340000*100)+'%';
+
+    q('#incomePctTag').textContent=Math.round(incomePct)+'%';
+    q('#bufferPctTag').textContent=Math.round(bufferPct)+'%';
+    q('#ticketPctTag').textContent=Math.round(ticketPct)+'%';
+
+    q('#medReady').textContent=readiness+'%';
+    q('#medReadyMini').textContent=readiness+'%';
+    q('#medMonthsMini').textContent=monthsLeft();
+    q('#medRing').style.setProperty('--p',readiness);
+    q('#medRouteFill').style.width=route+'%';
+    q('#medPlane').style.left=route+'%';
+    const rg=q('#medRouteGlow');if(rg)rg.style.width=route+'%';
+    const rr=q('#routeReady');if(rr)rr.textContent=readiness+'%';
+    const ri=q('#routeIncomePct');if(ri)ri.textContent=Math.round(incomePct)+'%';
+    const rb=q('#routeBufferPct');if(rb)rb.textContent=Math.round(bufferPct)+'%';
+    const rt=q('#routeTicketPct');if(rt)rt.textContent=Math.round(ticketPct)+'%';
+
+    q('#incomeInput').value=g.income;
+    q('#bufferInput').value=g.buffer;
+    q('#ticketInput').value=g.ticket;
+  }
+  function save(){
+    localStorage.setItem(GOAL_KEY,JSON.stringify(g));
+    render();
+    if(typeof toast==='function') toast('Цель обновлена ✨'); if(window.syncCompact)window.syncCompact(); if(window.renderAiAdvisor)window.renderAiAdvisor(); const tb=document.getElementById('todayMedBar'),tp=document.getElementById('todayMedPct'); if(tb&&tp){const p=Math.round(Math.min(100,g.income/70000*100)*.45+Math.min(100,g.buffer/200000*100)*.30+Math.min(100,g.ticket/140000*100)*.25);tb.style.width=p+'%';tp.textContent=p+'% готовности →';}
+  }
+  function bind(){
+    const si=q('#saveIncome'), sb=q('#saveBuffer'), st=q('#saveTicket');
+    if(si) si.onclick=()=>{g.income=Math.max(0,Number(q('#incomeInput').value)||0);save()};
+    if(sb) sb.onclick=()=>{g.buffer=Math.max(0,Number(q('#bufferInput').value)||0);save()};
+    if(st) st.onclick=()=>{g.ticket=Math.max(0,Number(q('#ticketInput').value)||0);save()};
+  }
+  window.renderMedellinGoal=render;
+  document.addEventListener('DOMContentLoaded',()=>{bind();render()});
+  setTimeout(()=>{bind();render()},50);
+})();
+</script>
+
+
+<script id="weight-goal-v1">
+(function(){
+  const KEY='lifeflow-weight-v1';
+  const START=110, TARGET=93;
+  let data=JSON.parse(localStorage.getItem(KEY)||'null')||{current:START,history:[]};
+
+  // v12 cleanup: remove only the latest saved 105 kg entry once.
+  const CLEANUP_KEY='lifeflow-weight-remove-last-105-v1';
+  if(!localStorage.getItem(CLEANUP_KEY)){
+    const history=Array.isArray(data.history)?data.history:[];
+    for(let i=history.length-1;i>=0;i--){
+      if(Number(history[i].weight)===105){
+        history.splice(i,1);
+        if(Number(data.current)===105){
+          data.current=history.length?Number(history[history.length-1].weight):START;
+        }
+        break;
+      }
+    }
+    data.history=history;
+    localStorage.setItem(KEY,JSON.stringify(data));
+    localStorage.setItem(CLEANUP_KEY,'1');
+  }
+
+  function fmt(n){return (Math.round(n*10)/10).toString().replace('.',',')}
+  function renderWeight(){
+    const cur=Number(data.current)||START;
+    const total=START-TARGET;
+    const lost=Math.max(0,START-cur);
+    const left=Math.max(0,cur-TARGET);
+    const pct=Math.max(0,Math.min(100,lost/total*100));
+
+    const qc=document.getElementById('weightCurrent');
+    if(!qc)return;
+    qc.textContent=fmt(cur)+' кг';
+    document.getElementById('weightBar').style.width=pct+'%';
+    document.getElementById('weightLost').textContent=fmt(lost)+' кг';
+    document.getElementById('weightLeft').textContent=fmt(left)+' кг';
+    document.getElementById('weightPct').textContent=Math.round(pct)+'%';
+    document.getElementById('weightInput').value=cur;
+
+    const box=document.getElementById('weightHistory');
+    const rows=(data.history||[]).slice(-5).reverse();
+    box.innerHTML=rows.length?rows.map(r=>`<div class="goalHistoryRow"><small>${r.date}</small><b>${fmt(r.weight)} кг</b></div>`).join(''):'<div class="muted">Пока нет записей.</div>';
+  }
+
+  function saveWeight(){
+    const inp=document.getElementById('weightInput');
+    const val=Number(inp.value);
+    if(!val||val<50||val>200)return;
+    data.current=val;
+    const now=new Date();
+    const date=new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'}).format(now);
+    data.history.push({date,weight:val});
+    localStorage.setItem(KEY,JSON.stringify(data));
+    renderWeight();
+    if(typeof toast==='function')toast('Вес сохранён ✓');
+    if(window.syncCompact)window.syncCompact();
+    if(window.renderAiAdvisor)window.renderAiAdvisor();
+    window.dispatchEvent(new CustomEvent('lifeflowWeightUpdated',{detail:{weight:val}}));
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    const b=document.getElementById('saveWeight');
+    if(b)b.onclick=saveWeight;
+    renderWeight();
+  });
+  setTimeout(()=>{
+    const b=document.getElementById('saveWeight');
+    if(b)b.onclick=saveWeight;
+    renderWeight();
+  },80);
+})();
+</script>
+
+
+<script id="lifeflow-v6-sync">
+(function(){
+ function syncCompact(){
+   try{
+     const med=JSON.parse(localStorage.getItem('lifeflow-medellin-v1')||'{"income":0,"buffer":0,"ticket":0}');
+     const p=Math.round(Math.min(100,(med.income||0)/70000*100)*.45+Math.min(100,(med.buffer||0)/200000*100)*.30+Math.min(100,(med.ticket||0)/140000*100)*.25);
+     const mp=document.getElementById('compactMedPct'); if(mp)mp.textContent=p+'%';
+     const buffer=Number(med.buffer)||0, ticket=Number(med.ticket)||0;
+     const cb=document.getElementById('compactBuffer'); if(cb)cb.textContent=new Intl.NumberFormat('ru-RU').format(buffer)+' / 200 000 ₽';
+     const cbf=document.getElementById('compactBufferFill'); if(cbf)cbf.style.width=Math.min(100,Math.round(buffer/200000*100))+'%';
+     const ct=document.getElementById('compactTicket'); if(ct)ct.textContent=new Intl.NumberFormat('ru-RU').format(ticket)+' / 140 000 ₽';
+     const ctf=document.getElementById('compactTicketFill'); if(ctf)ctf.style.width=Math.min(100,Math.round(ticket/140000*100))+'%';
+     const w=JSON.parse(localStorage.getItem('lifeflow-weight-v1')||'{"current":110}');
+     const ww=document.getElementById('compactWeight'); if(ww)ww.textContent=(w.current||110)+' → 93 кг';
+     if(typeof state!=='undefined'){
+       const k=typeof day==='function'?day():new Date().toISOString().slice(0,10);
+       const habits=state.habits||[], done=habits.filter(h=>(state.checks||{})[k+'|'+h.id]).length;
+       const pct=habits.length?Math.round(done/habits.length*100):0;
+       const sc=document.getElementById('compactDayScore');if(sc)sc.textContent=pct+'%';
+     }
+     const d=document.getElementById('compactDate');
+     if(d)d.textContent=new Intl.DateTimeFormat('ru-RU',{weekday:'long',day:'numeric',month:'long'}).format(new Date());
+   }catch(e){}
+ }
+ window.syncCompact=syncCompact;
+ document.addEventListener('DOMContentLoaded',syncCompact);
+ setTimeout(syncCompact,100);
+})();
+</script>
+
+
+<script id="lifeflow-v25-real-ai">
+(function(){
+ const q=s=>document.querySelector(s);
+ const CHAT_KEY='lifeflow-ai-chat-v3';
+ const wrap=q('#aiChatWrap'), box=q('#aiMessages'), input=q('#aiInput');
+ if(!wrap||!box||!input)return;
+ const nf=new Intl.NumberFormat('ru-RU');
+ const money=n=>nf.format(Math.round(Number(n)||0))+' ₽';
+ const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+ const fmt=n=>String(Math.round(Number(n)*10)/10).replace('.',',');
+ const dateKey=d=>{const x=new Date(d);x.setMinutes(x.getMinutes()-x.getTimezoneOffset());return x.toISOString().slice(0,10)};
+ function dayOffset(n=0){const d=new Date();d.setDate(d.getDate()+n);return dateKey(d)}
+ function readData(){
+   let med={income:0,buffer:0,ticket:0,targetDate:'2027-08-19'}, weight={current:110,history:[]};
+   try{med=Object.assign(med,JSON.parse(localStorage.getItem('lifeflow-medellin-v1')||'{}'))}catch(e){}
+   try{weight=Object.assign(weight,JSON.parse(localStorage.getItem('lifeflow-weight-v1')||'{}'))}catch(e){}
+   const st=typeof state!=='undefined'?state:{habits:[],checks:{},todos:{}};
+   return {med,weight,st};
+ }
+ function snapshot(){
+   const {med,weight,st}=readData(), today=typeof day==='function'?day():dayOffset(), tomorrow=typeof day==='function'?day(1):dayOffset(1);
+   const habits=st.habits||[], checks=st.checks||{}, todos=st.todos||{};
+   const habitStats=habits.map(h=>{let hits7=0,hits14=0;for(let i=0;i<14;i++){if(checks[(typeof day==='function'?day(-i):dayOffset(-i))+'|'+h.id]){hits14++;if(i<7)hits7++;}}return {id:h.id,name:h.name,goal:h.goal||'',cat:h.cat||'',hits7,hits14,target:Number(h.weekly)||7,done:!!checks[today+'|'+h.id]}});
+   const done=habitStats.filter(x=>x.done).length;
+   const openToday=(todos[today]||[]).filter(t=>!t.done), openTomorrow=(todos[tomorrow]||[]).filter(t=>!t.done);
+   const overdue=[];Object.keys(todos).filter(d=>d<today).sort().forEach(d=>(todos[d]||[]).forEach(t=>{if(!t.done)overdue.push({...t,date:d})}));
+   const income=Number(med.income)||0,buffer=Number(med.buffer)||0,ticket=Number(med.ticket)||0;
+   const incomePct=clamp(Math.round(income/70000*100),0,100),bufferPct=clamp(Math.round(buffer/200000*100),0,100),ticketPct=clamp(Math.round(ticket/140000*100),0,100);
+   const ready=Math.round(incomePct*.45+bufferPct*.30+ticketPct*.25);
+   const targetDate=new Date((med.targetDate||'2027-08-19')+'T12:00:00'), now=new Date();now.setHours(12,0,0,0);
+   const daysLeft=Math.max(0,Math.ceil((targetDate-now)/86400000)),monthsLeft=Math.max(0,daysLeft/30.44);
+   const totalSaved=buffer+ticket,savedLeft=Math.max(0,340000-totalSaved),monthlySavingsNeed=monthsLeft?Math.ceil(savedLeft/monthsLeft):savedLeft;
+   const cur=Number(weight.current)||110,weightLeft=Math.max(0,cur-93);
+   let weightTrend=null;
+   const wh=Array.isArray(weight.history)?weight.history:[];
+   if(wh.length>=2){const vals=wh.slice(-6).map(x=>Number(x.value??x.weight??x.current)).filter(Number.isFinite);if(vals.length>=2)weightTrend=Math.round((vals[vals.length-1]-vals[0])*10)/10;}
+   return {med,weight,habits,habitStats,todayPct:habits.length?Math.round(done/habits.length*100):0,openToday,openTomorrow,overdue,incomePct,bufferPct,ticketPct,ready,daysLeft,monthsLeft,totalSaved,savedLeft,monthlySavingsNeed,cur,weightLeft,weightTrend,today};
+ }
+ window.getLifeFlowAISnapshot=snapshot;
+ function priorityEngine(s){
+   const items=[];
+   s.overdue.slice(0,4).forEach((t,i)=>items.push({score:100-i*3,type:'task',label:t.text||'Просроченная задача',why:'просрочено'}));
+   s.openToday.slice(0,6).forEach((t,i)=>{const txt=(t.text||'').toLowerCase();let score=78-i*2; if(/сайт|клиент|портфол|работ|доход|заказ|англ|резюм|cv|upwork|linkedin/.test(txt))score+=10;if(/медель|виз|билет|переезд|накоп/.test(txt))score+=7;items.push({score,type:'task',label:t.text,why:'задача на сегодня'});});
+   const gaps=[{label:'увеличить удалённый доход',pct:s.incomePct,weight:45},{label:'пополнить финансовую подушку',pct:s.bufferPct,weight:30},{label:'пополнить бюджет переезда',pct:s.ticketPct,weight:25}];
+   gaps.forEach(g=>items.push({score:62+(100-g.pct)*.22+g.weight*.15,type:'goal',label:g.label,why:`прогресс ${g.pct}%`}));
+   s.habitStats.filter(h=>!h.done).forEach(h=>{const ratio=h.hits7/Math.max(1,h.target);items.push({score:35+(1-ratio)*22,type:'habit',label:h.name,why:`за неделю ${h.hits7}/${h.target}`})});
+   return items.sort((a,b)=>b.score-a.score);
+ }
+ function weakPoints(s){return [{name:'удалённый доход',pct:s.incomePct},{name:'финансовая подушка',pct:s.bufferPct},{name:'бюджет переезда',pct:s.ticketPct}].sort((a,b)=>a.pct-b.pct)}
+ function contextAnswer(raw){
+   const s=snapshot(), original=String(raw||'').trim(), text=original.toLowerCase().replace(/ё/g,'е'), pri=priorityEngine(s), gaps=weakPoints(s), top=pri[0];
+   const weakHabit=s.habitStats.slice().sort((a,b)=>(a.hits7/Math.max(1,a.target))-(b.hits7/Math.max(1,b.target)))[0];
+   if(!text)return 'Напиши вопрос — я разберу его по твоим данным LifeFlow.';
+   const math=text.replace(/,/g,'.').match(/^\s*(-?\d+(?:\.\d+)?)\s*([+\-*\/])\s*(-?\d+(?:\.\d+)?)\s*\??\s*$/);if(math){const a=+math[1],b=+math[3],op=math[2];if(op==='/'&&b===0)return 'На ноль делить нельзя.';const v=op==='+'?a+b:op==='-'?a-b:op==='*'?a*b:a/b;return `Ответ: ${fmt(v)}.`}
+   if(/^(привет|здравств|хай|hello|доброе|добрый)/.test(text))return `Привет. Сейчас вижу: Медельин ${s.ready}%, доход ${money(s.med.income)}/мес., вес ${fmt(s.cur)} кг, привычки сегодня ${s.todayPct}%. Самый полезный фокус сейчас — ${top?`«${top.label}»`:gaps[0].name}.`;
+   if(/не знаю|хз|без понятия|не уверен/.test(text))return top?`Тогда выберу за тебя один шаг: ${top.type==='task'?'закрой':'сфокусируйся на'} «${top.label}». Причина: ${top.why}. После этого уже имеет смысл выбирать следующий.`:'Тогда начни с самого слабого показателя по переезду — '+gaps[0].name+'.';
+   if(/что.*(важнее|приоритет)|самое важное|с чего начать|следующ.*шаг|что делать|фокус|сейчас/.test(text)){
+     const next=pri.slice(0,3).map((x,i)=>`${i+1}) ${x.label} — ${x.why}`).join('; ');return `Приоритеты по текущим данным: ${next}. Я бы не распылялся: сначала пункт №1.`;
+   }
+   if(/успею|реально.*переезд|хватит.*врем|срок|темп/.test(text)){
+     const need=s.monthlySavingsNeed;let verdict=s.ready>=65?'темп выглядит рабочим':s.ready>=35?'успеть возможно, но нужен более сильный темп':'сейчас запас по времени есть, но текущая готовность низкая';
+     return `До 19 августа 2027 примерно ${s.daysLeft} дней (${Math.round(s.monthsLeft)} мес.). Готовность ${s.ready}% — ${verdict}. По деньгам осталось ${money(s.savedLeft)} на подушку и переезд, то есть ориентир около ${money(need)} накоплений в месяц до даты цели. Главный риск сейчас — ${gaps[0].name} (${gaps[0].pct}%).`;
+   }
+   if(/медель|переезд|колумб|готовност/.test(text))return `Медельин: готовность ${s.ready}%. Доход ${s.incomePct}% (${money(s.med.income)} из 70 000 ₽/мес.), подушка ${s.bufferPct}% (${money(s.med.buffer)} из 200 000 ₽), переезд ${s.ticketPct}% (${money(s.med.ticket)} из 140 000 ₽). До даты цели ~${s.daysLeft} дней. Самый большой разрыв — ${gaps[0].name}.`;
+   if(/финанс|деньг|накоп|подуш|билет|бюджет/.test(text))return `Всего на подушку и переезд: ${money(s.totalSaved)} из 340 000 ₽. Осталось ${money(s.savedLeft)}. При оставшемся сроке это примерно ${money(s.monthlySavingsNeed)} в месяц. Подушка: ${money(s.med.buffer)}; переезд: ${money(s.med.ticket)}.`;
+   if(/доход|заработ|работ|клиент|сайт|международ/.test(text)){
+     const left=Math.max(0,70000-(Number(s.med.income)||0));return `Удалённый доход: ${money(s.med.income)}/мес. из цели 70 000 ₽. Не хватает ${money(left)}/мес. Это самый весомый компонент готовности к Медельину — 45% общего индекса. Поэтому действия, которые ведут к клиентам, портфолио и оплачиваемой веб-разработке, я ставлю выше второстепенных задач.`;
+   }
+   if(/вес|похуд|килограмм|кг/.test(text)){
+     let tr=s.weightTrend==null?'Пока мало записей для тренда.':s.weightTrend<0?`По последним записям вес изменился примерно на ${fmt(s.weightTrend)} кг — направление к цели.`:s.weightTrend>0?`По последним записям изменение около +${fmt(s.weightTrend)} кг — стоит смотреть на тенденцию следующих измерений.`:'По последним записям вес примерно стабилен.';
+     return `Вес ${fmt(s.cur)} кг → цель 93 кг. Осталось ${fmt(s.weightLeft)} кг. ${tr}`;
+   }
+   if(/задач|сегодня|завтра|просроч/.test(text)){
+     if(/завтра/.test(text))return s.openTomorrow.length?`На завтра ${s.openTomorrow.length} незакрытых задач. ${s.openTomorrow.slice(0,3).map((t,i)=>`${i+1}) ${t.text}`).join('; ')}.`:'На завтра незакрытых задач нет.';
+     return `Сегодня: ${s.openToday.length} незакрытых задач, просроченных ${s.overdue.length}. ${top&&top.type==='task'?`Первой я бы сделал «${top.label}» — ${top.why}.`:s.openToday.length?`Первая по списку: «${s.openToday[0].text}».`:'Задач на сегодня нет.'}`;
+   }
+   if(/привыч|недел|выполн|стрик|серия/.test(text)){
+     const lag=s.habitStats.filter(h=>h.hits7<h.target).sort((a,b)=>(a.hits7/a.target)-(b.hits7/b.target)).slice(0,3);return `Сегодня привычки выполнены на ${s.todayPct}%. За 7 дней больше всего отстают: ${lag.length?lag.map(h=>`${h.name} ${h.hits7}/${h.target}`).join(', '):'нет явных отставаний'}. Новые привычки я без твоего подтверждения не добавляю.`;
+   }
+   if(/слаб|проблем|тормоз|отста/.test(text))return `Слабое место по переезду — ${gaps[0].name}: ${gaps[0].pct}%.${weakHabit?` По существующим привычкам слабее всего «${weakHabit.name}»: ${weakHabit.hits7}/${weakHabit.target} за 7 дней.`:''}${s.overdue.length?` Плюс ${s.overdue.length} просроченных задач.`:''}`;
+   if(/прогресс|сводк|как.*дела|как.*иду|статист/.test(text))return `Сводка: Медельин ${s.ready}%; доход ${s.incomePct}%; подушка ${s.bufferPct}%; переезд ${s.ticketPct}%; вес ${fmt(s.cur)} кг; привычки сегодня ${s.todayPct}%; задач сегодня ${s.openToday.length}; просрочено ${s.overdue.length}. Главный следующий фокус — ${top?top.label:gaps[0].name}.`;
+   if(/мотивац|устал|лень|не хочу|сдаться/.test(text))return top?`Не нужно сейчас закрывать всё. Сделай один ограниченный шаг: «${top.label}». После него остановись и переоцени силы. Цель — вернуть движение, а не сделать идеальный день.`:'Снизь объём до одного конкретного действия, которое двигает основную цель.';
+   if(/кто ты|что умеешь|настоящ.*ии/.test(text))return 'Я бесплатный локальный советник LifeFlow: не языковая модель и не облачный GPT. Я анализирую твои реальные данные, сроки, разрывы по целям, задачи, привычки и тренды и выбираю приоритеты по правилам прямо в браузере. Интернет и API для этого не нужны.';
+   if(/добав.*привыч|созд.*привыч/.test(text))return 'Могу оценить или предложить идею, но сам добавлять новую привычку не буду без твоего явного подтверждения.';
+   return `Я не хочу выдумывать ответ вне данных LifeFlow. По твоим данным сейчас: Медельин ${s.ready}%, главный разрыв — ${gaps[0].name} (${gaps[0].pct}%), задач сегодня ${s.openToday.length}, просрочено ${s.overdue.length}. Если вопрос связан с целями, работой, финансами, весом, задачами или привычками — сформулируй его свободно, я разберу.`;
+ }
+ function cleanHistory(){try{return JSON.parse(localStorage.getItem(CHAT_KEY)||'[]').slice(-24)}catch(e){return []}}
+ let history=cleanHistory();function persist(){localStorage.setItem(CHAT_KEY,JSON.stringify(history.slice(-24)))}
+ function renderEmpty(){if(box.children.length)return;const el=document.createElement('div');el.className='aiEmpty';el.innerHTML='<div class="aiEmptyIcon">✦</div><b>LifeFlow AI</b><span>Настоящий ИИ анализирует твои цели, сроки, задачи, финансы, вес, питание и привычки. Если сеть недоступна, включится локальный резерв.</span>';box.appendChild(el)}
+ function addMsg(role,text,saveIt=true,source='ai'){const empty=box.querySelector('.aiEmpty');if(empty)empty.remove();const el=document.createElement('div');el.className='aiMsg '+role;el.textContent=text;const meta=document.createElement('span');meta.className='aiMsgMeta';meta.textContent=role==='bot'?(source==='local'?'LifeFlow AI · локальный резерв':'LifeFlow AI · OpenRouter Free'):'Ты';el.appendChild(meta);box.appendChild(el);box.scrollTop=box.scrollHeight;if(saveIt){history.push({role,text});persist()}}
+ async function cloudAsk(text){const payload={message:text,history:history.slice(-12).map(m=>({role:m.role==='bot'?'assistant':'user',content:m.text})),snapshot:snapshot()};const r=await fetch('/api/lifeflow-ai',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw new Error(await r.text());const out=await r.json();if(!out?.text)throw new Error('empty_ai_response');return out.text}
+ async function ask(text){addMsg('user',text);input.value='';const send=q('#aiSend');if(send)send.disabled=true;try{const answer=await cloudAsk(text);addMsg('bot',answer,true,'ai')}catch(e){addMsg('bot',contextAnswer(text),true,'local')}finally{if(send)send.disabled=false;input.focus()}}
+ function open(){wrap.classList.add('open');wrap.setAttribute('aria-hidden','false');if(!box.children.length){if(history.length)history.forEach(m=>addMsg(m.role,m.text,false,m.role==='bot'?'ai':'ai'));else renderEmpty()}setTimeout(()=>input.focus(),60)}
+ function close(){wrap.classList.remove('open');wrap.setAttribute('aria-hidden','true')}
+ q('#aiChatOpen').onclick=open;q('#aiChatClose').onclick=close;q('#aiSend').onclick=()=>{const t=input.value.trim();if(t)ask(t)};
+ const clearBtn=q('#aiChatClear');if(clearBtn)clearBtn.onclick=()=>{history=[];localStorage.removeItem(CHAT_KEY);box.innerHTML='';renderEmpty();clearBtn.textContent='Очищено';setTimeout(()=>clearBtn.textContent='Очистить',800);input.focus()};
+ function resizeInput(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,112)+'px'}input.addEventListener('input',resizeInput);input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();q('#aiSend').click();setTimeout(()=>input.style.height='auto',0)}});q('#aiQuick').addEventListener('click',e=>{const b=e.target.closest('[data-aiq]');if(b)ask(b.dataset.aiq)});wrap.addEventListener('click',e=>{if(e.target===wrap)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&wrap.classList.contains('open'))close()});
+ function refreshAdvisor(){const el=q('#aiAdvisorText'),tm=q('#aiAdvisorTime');if(!el)return;const s=snapshot(),p=priorityEngine(s)[0],g=weakPoints(s)[0];let txt;if(s.overdue.length)txt=`Сначала закрой «${s.overdue[0].text}»: задача просрочена. Затем вернись к ${g.name} — это главный разрыв по переезду (${g.pct}%).`;else if(p&&p.type==='task')txt=`Лучший следующий шаг сегодня — «${p.label}». По переезду слабее всего ${g.name}: ${g.pct}%.`;else txt=`Главный фокус сейчас — ${g.name} (${g.pct}%). До переезда около ${Math.round(s.monthsLeft)} мес.; по деньгам нужно в среднем около ${money(s.monthlySavingsNeed)} накоплений в месяц.`;el.textContent=txt;if(tm)tm.textContent='анализ LifeFlow';}
+ window.refreshSmartAdvisor=refreshAdvisor;setTimeout(refreshAdvisor,150);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshAdvisor()});
+})();
+</script>
+
+
+
+
+<script id="nutrition-v24-script">
+(()=>{
+ const KEY='lifeflow-nutrition-v1', WEIGHT_KEY='lifeflow-weight-v1';
+ const PROFILE={sex:'male',age:27,height:190,startWeight:110,targetWeight:93,activity:'moderate',activityFactor:1.55};
+ const q=s=>document.querySelector(s);
+ let data;try{data=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){};
+ data=data||{meals:[]};
+ data={...data,...PROFILE,meals:Array.isArray(data.meals)?data.meals:[]};
+ if(typeof data.manualTarget!=='boolean')data.manualTarget=Number(data.dailyTarget)>0;
+ const currentWeight=()=>{try{return Number(JSON.parse(localStorage.getItem(WEIGHT_KEY)||'null')?.current)||PROFILE.startWeight}catch(e){return PROFILE.startWeight}};
+ const bmr=(w=currentWeight())=>10*w+6.25*PROFILE.height-5*PROFILE.age+5; // Mifflin-St Jeor, мужчина
+ const tdee=(w=currentWeight())=>bmr(w)*PROFILE.activityFactor;
+ const autoTarget=(w=currentWeight())=>Math.max(1800,Math.round((tdee(w)-500)/50)*50);
+ const effectiveTarget=()=>data.manualTarget&&Number(data.dailyTarget)>0?Number(data.dailyTarget):autoTarget();
+ const dateKey=(off=0)=>{const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+off);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+ const save=()=>localStorage.setItem(KEY,JSON.stringify(data));
+ const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+ const todayMeals=()=>data.meals.filter(x=>x.date===dateKey());
+ const dayTotal=k=>data.meals.filter(x=>x.date===k).reduce((a,x)=>a+(Number(x.kcal)||0),0);
+ const signedBalance=(n,overWord='перебор')=>n>=0?`${Math.round(n)} ккал`:`${overWord} ${Math.round(-n)} ккал`;
+ function render(){
+   const today=dayTotal(dateKey()), target=effectiveTarget(), weight=currentWeight(), auto=autoTarget(weight), maintenance=Math.round(tdee(weight)/50)*50;
+   if(!data.manualTarget)data.dailyTarget=auto;
+   if(q('#calToday'))q('#calToday').textContent=Math.round(today);
+   if(q('#calorieBar'))q('#calorieBar').style.width=Math.min(100,today/target*100)+'%';
+   if(q('#calLeft')){const left=target-today;q('#calLeft').textContent=left>=0?`${Math.round(left)} ккал`:`перебор ${Math.round(-left)} ккал`;q('#calLeft').classList.remove('nutritionSetup')}
+   const week=[0,-1,-2,-3,-4,-5,-6].reduce((a,o)=>a+dayTotal(dateKey(o)),0);
+   if(q('#calWeek'))q('#calWeek').textContent=Math.round(week);
+   if(q('#calWeekBalance'))q('#calWeekBalance').textContent=signedBalance(target*7-week,'перебор');
+   if(q('#calorieTargetInput'))q('#calorieTargetInput').value=target;
+   if(q('#calorieTargetHint'))q('#calorieTargetHint').textContent=data.manualTarget
+     ?`Ручная цель: ${target} ккал/день. Авторасчёт сейчас ≈ ${auto} ккал при весе ${String(Math.round(weight*10)/10).replace('.',',')} кг (поддержание ≈ ${maintenance} ккал).`
+     :`Автоцель: ≈ ${target} ккал/день · мужчина, 27 лет, 190 см, средняя активность · текущий вес ${String(Math.round(weight*10)/10).replace('.',',')} кг. Оценка поддержания ≈ ${maintenance} ккал; заложен умеренный дефицит ≈ 500 ккал.`;
+   if(q('#mealList')){const rows=todayMeals().slice().reverse();q('#mealList').innerHTML=rows.length?rows.map(x=>`<div class="mealRow"><div><b>${esc(x.name)}</b><small>${esc(x.amount||'')} ${x.source==='photo'?'· оценка по фото':x.source==='voice'?'· голос':x.source==='local'?'· локальная оценка':'· текст'}</small></div><b>${Math.round(x.kcal)} ккал</b><button class="mealDelete" data-delmeal="${x.id}" aria-label="Удалить">×</button></div>`).join(''):'<div class="muted" style="font-size:11px">Пока ничего не добавлено. Можно написать: «рис 200 г, курица 150 г» или «2 яйца и 1 банан».</div>';q('#mealList').querySelectorAll('[data-delmeal]').forEach(b=>b.onclick=()=>{data.meals=data.meals.filter(x=>String(x.id)!==b.dataset.delmeal);save();render()})}
+   save();
+   window.dispatchEvent(new CustomEvent('lifeflowNutritionUpdated',{detail:{today,target,week,weight,autoTarget:auto,maintenance}}));
+ }
+ function addMeal(meal,source='text'){
+   const kcal=Math.max(0,Number(meal.kcal)||0);if(!kcal)return null;
+   const x={id:String(Date.now())+Math.random().toString(16).slice(2),date:dateKey(),time:new Date().toISOString(),name:meal.name||'Приём пищи',amount:meal.amount||'',kcal,source};data.meals.push(x);save();render();return x;
+ }
+ // Расширенный локальный справочник. Значения усреднённые на 100 г готового/съедобного продукта.
+ const FOOD_CATALOG=[
+  ['рис',130,['рис','риса','рисом','рисовый','рисовая','рисовое']],
+  ['гречка',110,['гречка','гречку','гречки','гречкой','гречневая','гречневый','греч']],
+  ['овсянка',88,['овсянка','овсянку','овсянки','овсяная каша','геркулес готовый']],
+  ['овсяные хлопья',370,['овсяные хлопья','овсянка сухая','геркулес','хлопья овсяные']],
+  ['макароны',150,['макароны','макарон','макаронами','паста','спагетти','вермишель','лапша']],
+  ['картофель',80,['картофель','картошка','картошку','картофеля','пюре картофельное','картофельное пюре']],
+  ['курица',165,['курица','курицу','курицы','куриная грудка','грудка куриная','куриное филе','филе курицы','куриное мясо']],
+  ['индейка',135,['индейка','индейку','индейки','филе индейки','грудка индейки','индейки филе']],
+  ['говядина',250,['говядина','говядину','говядины','говяжье мясо','мясо говядины']],
+  ['свинина',290,['свинина','свинину','свинины','свиное мясо','мясо свинины']],
+  ['баранина',294,['баранина','баранину','баранины','баранье мясо']],
+  ['фарш',250,['фарш','мясной фарш','фарша']],
+  ['лосось',208,['лосось','лосося','семга','сёмга','семги','сёмги','форель']],
+  ['тунец',132,['тунец','тунца','тунец консервированный']],
+  ['треска',82,['треска','трески','треску']],
+  ['минтай',72,['минтай','минтая']],
+  ['скумбрия',205,['скумбрия','скумбрии','скумбрию']],
+  ['креветки',99,['креветки','креветок','креветками']],
+  ['яйцо',155,['яйцо','яйца','яиц','яйцом','яичко','яички']],
+  ['творог',120,['творог','творога','творожок','творожка']],
+  ['сыр',350,['сыр','сыра','сыром','твёрдый сыр','твердый сыр']],
+  ['моцарелла',280,['моцарелла','моцареллу','моцареллы']],
+  ['молоко',60,['молоко','молока','молоком']],
+  ['кефир',50,['кефир','кефира']],
+  ['ряженка',67,['ряженка','ряженку','ряженки']],
+  ['йогурт',80,['йогурт','йогурта','йогуртом']],
+  ['греческий йогурт',73,['греческий йогурт','йогурт греческий']],
+  ['сливки',205,['сливки','сливок']],
+  ['сметана',205,['сметана','сметану','сметаны']],
+  ['банан',89,['банан','банана','бананы','бананов']],
+  ['яблоко',52,['яблоко','яблока','яблоки','яблок']],
+  ['апельсин',47,['апельсин','апельсина','апельсины','апельсинов']],
+  ['мандарин',53,['мандарин','мандарина','мандарины','мандаринов']],
+  ['груша',57,['груша','грушу','груши','груш']],
+  ['виноград',69,['виноград','винограда']],
+  ['киви',61,['киви']],
+  ['манго',60,['манго']],
+  ['ананас',50,['ананас','ананаса']],
+  ['арбуз',30,['арбуз','арбуза']],
+  ['дыня',34,['дыня','дыню','дыни']],
+  ['клубника',32,['клубника','клубнику','клубники']],
+  ['малина',52,['малина','малину','малины']],
+  ['черника',57,['черника','чернику','черники','голубика','голубики']],
+  ['хлеб',250,['хлеб','хлеба','хлебом','батон','батона','булка хлеба']],
+  ['хлеб цельнозерновой',247,['цельнозерновой хлеб','хлеб цельнозерновой','цельнозернового хлеба']],
+  ['лаваш',275,['лаваш','лаваша']],
+  ['тортилья',312,['тортилья','тортилью','тортильи']],
+  ['булочка',300,['булочка','булочку','булочки','булка']],
+  ['круассан',406,['круассан','круассана','круассаны']],
+  ['печенье',450,['печенье','печенья','печеньки','печенька']],
+  ['шоколад',535,['шоколад','шоколада','шоколадка','шоколадку']],
+  ['конфеты',430,['конфета','конфеты','конфет','конфетку']],
+  ['мороженое',207,['мороженое','мороженого']],
+  ['торт',350,['торт','торта','тортик']],
+  ['сахар',387,['сахар','сахара']],
+  ['мёд',304,['мёд','мед','мёда','меда']],
+  ['варенье',260,['варенье','варенья','джем','джема']],
+  ['орехи',600,['орех','орехи','орехов','грецкие орехи','миндаль','фундук','кешью']],
+  ['арахис',567,['арахис','арахиса']],
+  ['семечки',580,['семечки','семечек','семена подсолнечника']],
+  ['помидор',18,['помидор','помидора','помидоры','томаты','томат']],
+  ['огурец',15,['огурец','огурца','огурцы','огурцов']],
+  ['капуста',25,['капуста','капусту','капусты','белокочанная капуста']],
+  ['брокколи',34,['брокколи']],
+  ['цветная капуста',25,['цветная капуста','цветную капусту']],
+  ['морковь',41,['морковь','моркови','морковку']],
+  ['свёкла',43,['свёкла','свекла','свёклу','свеклу']],
+  ['лук',40,['лук','лука','лук репчатый']],
+  ['чеснок',149,['чеснок','чеснока']],
+  ['перец',31,['перец болгарский','болгарский перец','сладкий перец']],
+  ['кабачок',17,['кабачок','кабачка','кабачки']],
+  ['баклажан',25,['баклажан','баклажана','баклажаны']],
+  ['авокадо',160,['авокадо']],
+  ['кукуруза',96,['кукуруза','кукурузу','кукурузы']],
+  ['горошек',81,['зелёный горошек','зеленый горошек','горошек']],
+  ['фасоль',127,['фасоль','фасоли']],
+  ['чечевица',116,['чечевица','чечевицу','чечевицы']],
+  ['нут',164,['нут','нута']],
+  ['масло растительное',899,['растительное масло','масло растительное','подсолнечное масло','масло подсолнечное','оливковое масло','масло оливковое']],
+  ['масло сливочное',748,['сливочное масло','масло сливочное']],
+  ['майонез',680,['майонез','майонеза']],
+  ['кетчуп',112,['кетчуп','кетчупа']],
+  ['соус',120,['соус','соуса']],
+  ['колбаса',300,['колбаса','колбасу','колбасы','салями']],
+  ['сосиски',300,['сосиска','сосиски','сосисок','сарделька','сардельки']],
+  ['ветчина',145,['ветчина','ветчину','ветчины']],
+  ['бекон',541,['бекон','бекона']],
+  ['котлета',230,['котлета','котлету','котлеты','котлет']],
+  ['пельмени',250,['пельмени','пельменей','пельмешки']],
+  ['вареники',215,['вареники','вареников']],
+  ['манты',230,['манты','мантов']],
+  ['хинкали',210,['хинкали']],
+  ['голубцы',150,['голубцы','голубцов']],
+  ['плов',180,['плов','плова']],
+  ['борщ',55,['борщ','борща']],
+  ['суп',50,['суп','супа']],
+  ['щи',45,['щи']],
+  ['солянка',75,['солянка','солянку','солянки']],
+  ['окрошка',60,['окрошка','окрошку','окрошки']],
+  ['каша',110,['каша','кашу','каши']],
+  ['сырники',230,['сырник','сырники','сырников']],
+  ['блины',227,['блин','блины','блинов','блинчик','блинчики']],
+  ['оладьи',230,['оладьи','оладий','оладушек']],
+  ['омлет',154,['омлет','омлета']],
+  ['яичница',196,['яичница','яичницу','яичницы']],
+  ['шаурма',220,['шаурма','шаурму','шаверма','шаверму']],
+  ['бургер',250,['бургер','бургера','гамбургер','чизбургер']],
+  ['пицца',266,['пицца','пиццу','пиццы']],
+  ['суши',150,['суши','роллы','ролл','роллов']],
+  ['картофель фри',312,['картофель фри','картошка фри','фри']],
+  ['наггетсы',296,['наггетс','наггетсы','наггетсов']],
+  ['чипсы',536,['чипсы','чипсов']],
+  ['попкорн',375,['попкорн','попкорна']],
+  ['протеиновый батончик',350,['протеиновый батончик','батончик протеиновый','протеин батончик']],
+  ['протеин',400,['протеин','протеина','сывороточный протеин']],
+  ['вода',0,['вода','воды']],
+  ['сок',45,['сок','сока']],
+  ['газировка',42,['газировка','газировку','кола','пепси','лимонад']],
+  ['кофе',2,['кофе','американо','эспрессо']],
+  ['капучино',45,['капучино']],
+  ['латте',55,['латте']],
+  ['чай',1,['чай','чая']]
+ ];
+ const escapeRe=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ const norm=s=>String(s||'').toLowerCase().replace(/ё/g,'е').replace(/[–—]/g,'-').replace(/\s+/g,' ').trim();
+ const ALIASES=[];FOOD_CATALOG.forEach(([name,kcal,aliases])=>aliases.forEach(a=>ALIASES.push({alias:norm(a),name,kcal})));
+ ALIASES.sort((a,b)=>b.alias.length-a.alias.length);
+ const aliasPattern=ALIASES.map(x=>escapeRe(x.alias).replace(/\\ /g,'\\s+')).join('|');
+ const findFood=raw=>{const w=norm(raw);return ALIASES.find(x=>w===x.alias)||ALIASES.find(x=>w.includes(x.alias)||x.alias.includes(w));};
+ const eachDb=[
+  {aliases:['яйцо','яйца','яиц','яичко','яички'],name:'яйца',kcal:75,unit:'шт.'},
+  {aliases:['банан','банана','бананы'],name:'банан',kcal:105,unit:'шт.'},
+  {aliases:['яблоко','яблока','яблоки'],name:'яблоко',kcal:80,unit:'шт.'},
+  {aliases:['апельсин','апельсина','апельсины'],name:'апельсин',kcal:65,unit:'шт.'},
+  {aliases:['мандарин','мандарина','мандарины'],name:'мандарин',kcal:45,unit:'шт.'},
+  {aliases:['груша','груши','грушу'],name:'груша',kcal:100,unit:'шт.'},
+  {aliases:['киви'],name:'киви',kcal:45,unit:'шт.'}
+ ];
+ function localParse(text){
+   const words={ноль:0,один:1,одна:1,одно:1,два:2,две:2,три:3,четыре:4,пять:5,шесть:6,семь:7,восемь:8,девять:9,десять:10};
+   const t=norm(text).replace(/(\d),(\d)/g,'$1.$2').replace(/\b(ноль|один|одна|одно|два|две|три|четыре|пять|шесть|семь|восемь|девять|десять)\b/g,w=>String(words[w]));
+   let items=[];const seen=new Set();
+   const push=(food,amount,kcal,approx=false)=>{if(!food||!Number.isFinite(kcal)||kcal<=0)return;const key=food.name+'|'+amount;if(seen.has(key))return;seen.add(key);items.push({name:food.name,amount,kcal:Math.round(kcal),...(approx?{approx:true}:{})})};
+   const qty='(\\d+(?:\\.\\d+)?)';
+   const units='(кг|килограмм(?:а|ов)?|г|гр|грамм(?:а|ов)?|мл|миллилитр(?:а|ов)?|л|литр(?:а|ов)?)';
+   const food=`(${aliasPattern})`;
+   const calcMass=(n,u)=>{n=Number(n);u=norm(u);if(/^кг|килограмм/.test(u))return n*1000;if(/^л$|литр/.test(u))return n*1000;return n;};
+   let m;
+   const after=new RegExp(`${food}[^\\d]{0,16}${qty}\\s*${units}`,'gi');
+   while((m=after.exec(t))){const f=findFood(m[1]);if(f){const g=calcMass(m[2],m[3]);push(f,`${Math.round(g*10)/10} г`,f.kcal*g/100)}}
+   const before=new RegExp(`${qty}\\s*${units}[^а-яa-z0-9]{0,8}${food}`,'gi');
+   while((m=before.exec(t))){const f=findFood(m[3]);if(f){const g=calcMass(m[1],m[2]);push(f,`${Math.round(g*10)/10} г`,f.kcal*g/100)}}
+   // Короткая запись: "рис 200", "курица 150".
+   const shortRe=new RegExp(`${food}[^\\d]{0,10}${qty}(?!\\s*(?:ккал|кал|шт|штук|порц))`,'gi');
+   while((m=shortRe.exec(t))){const f=findFood(m[1]),g=Number(m[2]);if(f&&g>=10&&g<=3000)push(f,`${g} г`,f.kcal*g/100)}
+   // Штуки: число может стоять до или после продукта.
+   for(const e of eachDb){const ep=e.aliases.map(a=>escapeRe(norm(a)).replace(/\\ /g,'\\s+')).join('|');
+     const r1=new RegExp(`${qty}\\s*(?:(?:шт\\.?|штук[аи]?|штуки?)\\s*)?(${ep})`,'i');
+     const r2=new RegExp(`(${ep})[^\\d]{0,10}${qty}\\s*(?:шт\\.?|штук[аи]?|штуки?)?`,'i');
+     let mm=t.match(r1), count=mm?Number(mm[1]):0;if(!mm){mm=t.match(r2);count=mm?Number(mm[2]):0}if(count>0&&count<=30)push({name:e.name},`${count} ${e.unit}`,e.kcal*count);
+   }
+   // Хлеб кусками/ломтиками.
+   const bread=t.match(/(\d+(?:\.\d+)?)\s*(?:кус(?:ок|очка|ка|ков)?|ломтик(?:а|ов)?|тост(?:а|ов)?)\s+(?:хлеб[а-я]*|батон[а-я]*)/i);if(bread)push({name:'хлеб'},`${Number(bread[1])} кус.`,80*Number(bread[1]),true);
+   // Ложки — полезно для масла, сахара, соусов и сметаны.
+   const spoonRe=new RegExp(`${qty}\\s*(ст(?:олов(?:ая|ые|ых)?|\\.)?\\s*л(?:ожк[аи]?|\\.)?|ч(?:айн(?:ая|ые|ых)?|\\.)?\\s*л(?:ожк[аи]?|\\.)?)[^а-я0-9]{0,8}${food}`,'gi');
+   while((m=spoonRe.exec(t))){const f=findFood(m[3]);if(f){const table=/^ст/.test(norm(m[2]));const g=Number(m[1])*(table?15:5);push(f,`${m[1]} ${table?'ст. л.':'ч. л.'} (~${g} г)`,f.kcal*g/100,true)}}
+   // Порции распространённых готовых блюд.
+   const portions=[
+    ['борщ',165,300],['суп',150,300],['щи',135,300],['солянка',225,300],['окрошка',180,300],['плов',450,250],['пельмени',500,200],['вареники',430,200],['манты',575,250],['хинкали',525,250],['голубцы',375,250],['каша',275,250],['сырники',460,200],['блины',455,200],['оладьи',460,200],['омлет',310,200],['яичница',390,200],['шаурма',660,300],['бургер',625,250],['пицца',665,250],['суши',375,250],['роллы',375,250]
+   ];
+   for(const [name,kcal,grams] of portions){const aliases=ALIASES.filter(x=>x.name===name).map(x=>escapeRe(x.alias).replace(/\\ /g,'\\s+'));if(!aliases.length)aliases.push(escapeRe(name));const pr=new RegExp(`(?:${aliases.join('|')})[^\\d]{0,14}${qty}\\s*(?:порц(?:ия|ии|ий|\\.)?|тарелк(?:а|и|у)?|порции?)`,'i');const rev=new RegExp(`${qty}\\s*(?:порц(?:ия|ии|ий|\\.)?|тарелк(?:а|и|у)?|порции?)[^а-я0-9]{0,8}(?:${aliases.join('|')})`,'i');let mm=t.match(pr),c=mm?Number(mm[1]):0;if(!mm){mm=t.match(rev);c=mm?Number(mm[1]):0}if(c>0&&c<=10)push({name},`${c} порц. (~${Math.round(grams*c)} г)`,kcal*c,true)}
+   if(!items.length)return null;
+   return {items,total:items.reduce((a,x)=>a+x.kcal,0),confidence:'local'};
+ }
+ function calorieStatus(total){const target=effectiveTarget(),today=dayTotal(dateKey()),left=target-today;return left>=0?`Добавлено ${Math.round(total)} ккал. Сегодня осталось примерно ${Math.round(left)} ккал из ${target}.`:`Добавлено ${Math.round(total)} ккал. Дневная цель превышена примерно на ${Math.round(-left)} ккал.`}
+ async function cloudAnalyze(payload){
+   const r=await fetch('/api/food-ai',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw new Error(await r.text());return r.json();
+ }
+ window.LifeFlowNutrition={data,render,addMeal,dayTotal,dateKey,localParse,calorieStatus,cloudAnalyze,currentWeight,bmr,tdee,autoTarget,effectiveTarget};
+ q('#saveCalorieTarget')?.addEventListener('click',()=>{const v=Number(q('#calorieTargetInput').value);if(v<1400||v>4500){window.toast?.('Укажи значение от 1400 до 4500 ккал');return}data.dailyTarget=Math.round(v/50)*50;data.manualTarget=true;save();render();window.toast?.('Ручная цель сохранена')});
+ q('#calorieTargetInput')?.addEventListener('dblclick',()=>{data.manualTarget=false;data.dailyTarget=autoTarget();save();render();window.toast?.('Включён автоматический калораж')});
+ window.addEventListener('lifeflowWeightUpdated',()=>{if(!data.manualTarget)data.dailyTarget=autoTarget();render()});
+ render();
+})();
+</script>
+
+<script id="ai-food-bridge-v23">
+(()=>{
+ const $=s=>document.querySelector(s), messages=$('#aiMessages'), input=$('#aiInput'), send=$('#aiSend');
+ if(!messages||!input||!send||!window.LifeFlowNutrition)return;
+ const N=window.LifeFlowNutrition, oldSend=send.onclick;
+ function msg(role,text,extra=''){const empty=messages.querySelector('.aiEmpty');if(empty)empty.remove();const el=document.createElement('div');el.className='aiMsg '+role;el.textContent=text;if(extra)el.insertAdjacentHTML('beforeend',extra);const meta=document.createElement('span');meta.className='aiMsgMeta';meta.textContent=role==='bot'?'LifeFlow AI · питание':'Ты';el.appendChild(meta);messages.appendChild(el);messages.scrollTop=messages.scrollHeight;}
+ function isFood(t){return /(съел|съела|ел\b|ела\b|поел|поела|завтрак|обед|ужин|перекус|калори|ккал|грамм|килограмм|миллилитр|литр|\bг\b|\bкг\b|\bмл\b|шт|порц|тарелк|ложк|рис|каша|макарон|паста|карто|кур|индей|мяс|говяд|свин|рыб|лос|тун|яйц|творог|сыр|молок|кефир|йогурт|банан|яблок|апельс|хлеб|лаваш|сахар|мед|мёд|шоколад|печен|конфет|орех|овощ|помид|огур|капуст|морков|авокад|масл|майон|сметан|колбас|сосиск|котлет|пельмен|вареник|манты|хинкал|борщ|суп|плов|блин|сырник|омлет|яичниц|шаурм|бургер|пицц|суш|ролл|фри|наггет|чипс|кофе|чай|сок|кола)/i.test(t)}
+ function addResult(r,source){const items=Array.isArray(r.items)?r.items:[];if(!items.length&&r.total)items.push({name:'Приём пищи',amount:'',kcal:r.total});let total=0;items.forEach(x=>{const m=N.addMeal(x,source);if(m)total+=m.kcal});const approx=items.some(x=>x.approx)?' Оценка порции приблизительная.':'';const note=r.note?` ${r.note}`:'';msg('bot',`${N.calorieStatus(total)}${approx}${note}`)}
+ async function analyzeText(t){msg('user',t);input.value='';send.disabled=true;try{let r;try{r=await N.cloudAnalyze({text:t})}catch(e){r=N.localParse(t);if(!r)throw e}addResult(r,r?.confidence==='local'?'local':'text')}catch(e){msg('bot','Я не смог надёжно посчитать этот приём пищи локально. Напиши название продукта или блюда и количество: граммы, миллилитры, штуки, ложки или порции. Для сложного домашнего блюда точность выше, если указать вес или основные ингредиенты.')}finally{send.disabled=false;input.focus()}}
+ send.onclick=()=>{const t=input.value.trim();if(!t)return;if(isFood(t))analyzeText(t);else if(typeof oldSend==='function')oldSend.call(send)};
+ const quick=$('#aiQuick');quick?.addEventListener('click',e=>{const b=e.target.closest('[data-aiq]');if(!b||!/калори/i.test(b.dataset.aiq||''))return;e.stopImmediatePropagation();const total=N.dayTotal(N.dateKey()),target=Number(N.effectiveTarget?.()||N.data.dailyTarget)||0,week=[0,-1,-2,-3,-4,-5,-6].reduce((a,o)=>a+N.dayTotal(N.dateKey(o)),0);msg('user',b.dataset.aiq);msg('bot',target?`Сегодня ${Math.round(total)} из ${target} ккал. ${total<=target?`Осталось ${Math.round(target-total)} ккал.`:`Превышение ${Math.round(total-target)} ккал.`} За последние 7 дней — ${Math.round(week)} из ${target*7} ккал.`:`Сегодня записано ${Math.round(total)} ккал. Сначала задай дневную цель в разделе «Похудение».`);},true);
+})();
+</script>
+</body></html>
